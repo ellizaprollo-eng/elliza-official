@@ -961,6 +961,7 @@ if (processSection && processPin && processTrack && !window.matchMedia('(prefers
   }
 
   function measureProcessPin() {
+    processViewport.scrollLeft = 0;
     const styles = getComputedStyle(processViewport);
     const padding = parseFloat(styles.paddingLeft) + parseFloat(styles.paddingRight);
     processDistance = Math.max(0, Math.round(processTrack.scrollWidth + padding - processViewport.clientWidth));

@@ -1729,6 +1729,13 @@ main, .footer { position: relative; z-index: 1; }
   .process-card-copy { padding-top: 22px; }
 }
 
+/* Snap cards to the padded edge so Step 01 lines up with the section heading. */
+.process-viewport { scroll-padding-inline: max(20px, calc((100vw - var(--max)) / 2)); }
+
+@media (max-width: 700px) {
+  .process-viewport { padding-inline: 14px; scroll-padding-inline: 14px; }
+}
+
 /* PINNED HORIZONTAL PROCESS SCROLL
    The section holds in place while the cards slide from Step 01 to Step 04,
    then releases into normal vertical scrolling. Enabled by JS (.is-pinned). */
