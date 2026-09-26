@@ -679,14 +679,17 @@ if (window.matchMedia('(pointer:fine)').matches) {
     mouseX = e.clientX; mouseY = e.clientY;
     dot.style.left = `${mouseX}px`; dot.style.top = `${mouseY}px`;
     dot.style.opacity = ring.style.opacity = '1';
+    if (!ringRunning) { ringRunning = true; requestAnimationFrame(moveRing); }
   });
+  // Only animate while the ring is catching up, so the page is idle when the mouse rests.
+  let ringRunning = false;
   function moveRing() {
     ringX += (mouseX - ringX) * .16;
     ringY += (mouseY - ringY) * .16;
     ring.style.left = `${ringX}px`; ring.style.top = `${ringY}px`;
-    requestAnimationFrame(moveRing);
+    if (Math.abs(mouseX - ringX) + Math.abs(mouseY - ringY) > .3) requestAnimationFrame(moveRing);
+    else ringRunning = false;
   }
-  moveRing();
   document.querySelectorAll('a, button, .service-row, .project-card').forEach(el => {
     el.addEventListener('mouseenter', () => ring.classList.add('hover'));
     el.addEventListener('mouseleave', () => ring.classList.remove('hover'));
@@ -754,14 +757,18 @@ if (window.matchMedia('(pointer:fine)').matches) {
 // Project hover lens, tilt, and floating "View" cursor
 const projectBubble = document.getElementById('projectViewBubble');
 let bubbleX = 0, bubbleY = 0, bubbleTargetX = 0, bubbleTargetY = 0;
+let bubbleRunning = false;
 function animateProjectBubble() {
   bubbleX += (bubbleTargetX - bubbleX) * .18;
   bubbleY += (bubbleTargetY - bubbleY) * .18;
   projectBubble.style.left = `${bubbleX}px`;
   projectBubble.style.top = `${bubbleY}px`;
-  requestAnimationFrame(animateProjectBubble);
+  if (Math.abs(bubbleTargetX - bubbleX) + Math.abs(bubbleTargetY - bubbleY) > .3) requestAnimationFrame(animateProjectBubble);
+  else bubbleRunning = false;
 }
-animateProjectBubble();
+function startProjectBubble() {
+  if (!bubbleRunning) { bubbleRunning = true; requestAnimationFrame(animateProjectBubble); }
+}
 
 projects.forEach(card => {
   const inner = card.querySelector('a');
@@ -776,6 +783,7 @@ projects.forEach(card => {
     if (inner) inner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
     bubbleTargetX = event.clientX;
     bubbleTargetY = event.clientY;
+    startProjectBubble();
   });
   card.addEventListener('mouseenter', () => projectBubble.classList.add('show'));
   card.addEventListener('mouseleave', () => {
@@ -808,15 +816,16 @@ if (servicesSecondary) {
 // Floating image previews for service rows
 const servicePreview = document.getElementById('servicePreview');
 const servicePreviewImage = document.getElementById('servicePreviewImage');
-    let previewX = 0, previewY = 0, previewTargetX = 0, previewTargetY = 0;
+let previewX = 0, previewY = 0, previewTargetX = 0, previewTargetY = 0;
+let previewRunning = false;
 function animateServicePreview() {
   previewX += (previewTargetX - previewX) * .14;
   previewY += (previewTargetY - previewY) * .14;
   servicePreview.style.left = `${previewX}px`;
   servicePreview.style.top = `${previewY}px`;
-  requestAnimationFrame(animateServicePreview);
+  if (Math.abs(previewTargetX - previewX) + Math.abs(previewTargetY - previewY) > .3) requestAnimationFrame(animateServicePreview);
+  else previewRunning = false;
 }
-animateServicePreview();
 
 document.querySelectorAll('.service-row').forEach(row => {
   row.addEventListener('mouseenter', () => {
@@ -829,6 +838,7 @@ document.querySelectorAll('.service-row').forEach(row => {
   row.addEventListener('mousemove', event => {
     previewTargetX = Math.min(window.innerWidth - 140, event.clientX + 150);
     previewTargetY = Math.max(120, Math.min(window.innerHeight - 120, event.clientY));
+    if (!previewRunning) { previewRunning = true; requestAnimationFrame(animateServicePreview); }
   });
   row.addEventListener('mouseleave', () => servicePreview.classList.remove('show'));
 });
@@ -859,16 +869,27 @@ updateDepth();
 
 // Vivid Motion-inspired response across the entire page while preserving the ring cursor.
 const heroSection = document.querySelector('.hero');
+// The glow and grid live on their own layers so pointer updates restyle only them, not the whole page.
+const pageGlow = document.getElementById('pageGlow');
+const pageGrid = document.getElementById('pageGrid');
 if (window.matchMedia('(pointer:fine)').matches) {
+  // Batch pointer updates to one per frame; each update restyles the page background.
+  let pointerEvent = null;
   document.addEventListener('pointermove', event => {
+    if (!pointerEvent) requestAnimationFrame(applyPointer);
+    pointerEvent = event;
+  }, { passive: true });
+  function applyPointer() {
+    const event = pointerEvent;
+    pointerEvent = null;
     const x = (event.clientX / window.innerWidth) * 100;
     const y = (event.clientY / window.innerHeight) * 100;
-    document.body.style.setProperty('--page-x', `${x}%`);
-    document.body.style.setProperty('--page-y', `${y}%`);
-    document.body.style.setProperty('--page-grid-x', `${(x - 50) * -.09}px`);
-    document.body.style.setProperty('--page-grid-y', `${(y - 50) * -.09}px`);
+    pageGlow.style.setProperty('--page-x', `${x}%`);
+    pageGlow.style.setProperty('--page-y', `${y}%`);
+    pageGrid.style.setProperty('--page-grid-x', `${(x - 50) * -.09}px`);
+    pageGrid.style.setProperty('--page-grid-y', `${(y - 50) * -.09}px`);
 
-    if (heroSection) {
+    if (heroSection && window.scrollY < heroSection.offsetHeight) {
       heroSection.style.setProperty('--hero-x', `${x}%`);
       heroSection.style.setProperty('--hero-y', `${y}%`);
       heroSection.style.setProperty('--hero-shift-x', `${(x - 50) * .12}px`);
@@ -876,12 +897,12 @@ if (window.matchMedia('(pointer:fine)').matches) {
       heroSection.style.setProperty('--hero-shift-x-reverse', `${(x - 50) * -.08}px`);
       heroSection.style.setProperty('--hero-shift-y-reverse', `${(y - 50) * -.08}px`);
     }
-  }, { passive: true });
+  }
   document.addEventListener('mouseleave', () => {
-    document.body.style.setProperty('--page-x', '50%');
-    document.body.style.setProperty('--page-y', '35%');
-    document.body.style.setProperty('--page-grid-x', '0px');
-    document.body.style.setProperty('--page-grid-y', '0px');
+    pageGlow.style.setProperty('--page-x', '50%');
+    pageGlow.style.setProperty('--page-y', '35%');
+    pageGrid.style.setProperty('--page-grid-x', '0px');
+    pageGrid.style.setProperty('--page-grid-y', '0px');
   });
 }
 
@@ -892,7 +913,7 @@ const processViewport = document.getElementById('processViewport');
 if (processViewport) {
   let dragging = false, startX = 0, startScrollLeft = 0;
   processViewport.addEventListener('pointerdown', (event) => {
-    if (event.button !== 0) return;
+    if (event.button !== 0 || processViewport.closest('.is-pinned')) return;
     dragging = true;
     startX = event.clientX;
     startScrollLeft = processViewport.scrollLeft;
@@ -913,4 +934,44 @@ if (processViewport) {
   processViewport.addEventListener('pointerup', stopProcessDrag);
   processViewport.addEventListener('pointercancel', stopProcessDrag);
   processViewport.addEventListener('lostpointercapture', stopProcessDrag);
+}
+
+// Pinned horizontal scroll: the Process section holds while the cards slide
+// from Step 01 to Step 04, then releases back to vertical scrolling.
+const processSection = document.getElementById('process');
+const processPin = processSection?.querySelector('.process-pin');
+const processTrack = processViewport?.querySelector('.process-track');
+if (processSection && processPin && processTrack && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  processSection.classList.add('is-pinned');
+  // Cards slide in faster than lazy loading reacts, so fetch their images once the section is near.
+  const processImageObserver = new IntersectionObserver(entries => {
+    if (!entries[0].isIntersecting) return;
+    processTrack.querySelectorAll('img[loading="lazy"]').forEach(img => { img.loading = 'eager'; });
+    processImageObserver.disconnect();
+  }, { rootMargin: '100% 0px' });
+  processImageObserver.observe(processSection);
+  let processDistance = 0;
+  let processTicking = false;
+
+  function updateProcessPin() {
+    processTicking = false;
+    const scrolled = -processSection.getBoundingClientRect().top;
+    const progress = processDistance ? Math.min(1, Math.max(0, scrolled / processDistance)) : 0;
+    processTrack.style.transform = `translate3d(${(-progress * processDistance).toFixed(1)}px, 0, 0)`;
+  }
+
+  function measureProcessPin() {
+    const styles = getComputedStyle(processViewport);
+    const padding = parseFloat(styles.paddingLeft) + parseFloat(styles.paddingRight);
+    processDistance = Math.max(0, Math.round(processTrack.scrollWidth + padding - processViewport.clientWidth));
+    processSection.style.height = `${processPin.offsetHeight + processDistance}px`;
+    updateProcessPin();
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!processTicking) { processTicking = true; requestAnimationFrame(updateProcessPin); }
+  }, { passive: true });
+  window.addEventListener('resize', measureProcessPin);
+  window.addEventListener('load', measureProcessPin);
+  measureProcessPin();
 }
