@@ -299,7 +299,7 @@ const websitePreviewCards = [...document.querySelectorAll(
 function updateWebsitePreview(card) {
   const frame = card.querySelector('.project-image');
   const image = card.querySelector('.website-scroll-image');
-  if (!frame || !image || !image.naturalWidth || !image.naturalHeight) return;
+  if (!frame || !image || !frame.clientWidth || !image.naturalWidth || !image.naturalHeight) return;
 
   const renderedHeight = frame.clientWidth * (image.naturalHeight / image.naturalWidth);
   const distance = Math.max(0, Math.round(renderedHeight - frame.clientHeight));
@@ -342,7 +342,11 @@ filterButtons.forEach(button => {
       const show = project.dataset.category === filter;
       if (show) {
         project.style.display = '';
-        requestAnimationFrame(() => project.classList.remove('is-hidden'));
+        requestAnimationFrame(() => {
+          if (!button.classList.contains('active')) return;
+          project.classList.remove('is-hidden');
+          updateWebsitePreview(project);
+        });
       } else {
         project.classList.add('is-hidden');
         const cardVideo = project.querySelector('video');
@@ -492,7 +496,6 @@ function showModalItem(index, direction = 0) {
   modal.classList.toggle('is-reel', reel);
   modal.classList.toggle('is-automation', automationPreview);
   if (automationPreview) { setAutomationZoom(0); resetAutomationPan(); }
-  setAutomationZoom(1);
   modal.classList.toggle('is-website-preview', websitePreview);
   modal.classList.remove('is-popup-scrolling');
 
@@ -570,6 +573,16 @@ modal.addEventListener('click', event => { if (event.target === modal) closeModa
 document.addEventListener('keydown', event => {
   if (!modal.classList.contains('open')) return;
   if (event.key === 'Escape') closeModal();
+  if (event.key === 'Tab') {
+    const focusable = [...modal.querySelectorAll('button:not(:disabled), video[controls]')]
+      .filter(el => el.offsetParent !== null);
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (!modal.contains(document.activeElement)) { event.preventDefault(); first?.focus(); }
+    else if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+  }
+  if (event.target === modalVideo) return;
   if (event.key === 'ArrowLeft') showModalItem(activeCategoryIndex - 1, -1);
   if (event.key === 'ArrowRight') showModalItem(activeCategoryIndex + 1, 1);
 });
@@ -785,6 +798,8 @@ if (servicesSecondary) {
     revealWords.forEach((word, index) => word.classList.toggle('is-lit', index < litCount));
   }
   window.removeEventListener('scroll', updateServicesColor);
+  window.removeEventListener('resize', updateServicesColor);
+  servicesSecondary.style.color = '';
   window.addEventListener('scroll', illuminateServiceWords, { passive: true });
   window.addEventListener('resize', illuminateServiceWords);
   illuminateServiceWords();
