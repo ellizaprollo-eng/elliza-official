@@ -1813,3 +1813,18 @@ main, .footer { position: relative; z-index: 1; }
   .is-pinned .process-card { padding: 22px; }
   .is-pinned .process-card-copy p { min-height: calc(1.75em * 4); }
 }
+
+/* WHATSAPP CONTACT BUTTON */
+.btn-whatsapp .whatsapp-icon {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  fill: #25d366;
+  transition: fill .25s ease;
+}
+
+.btn-whatsapp:hover .whatsapp-icon { fill: currentColor; }
+
+.nav-cta.btn-whatsapp { gap: 10px; }
+.nav-cta.btn-whatsapp::after { margin-left: 6px; }
+.nav-cta.btn-whatsapp:hover .whatsapp-icon { fill: #25d366; }
