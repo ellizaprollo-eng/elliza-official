@@ -15,6 +15,6 @@ assets/images/                 Local images (portrait)
 
 Portfolio media links live near the top of `assets/js/main.js`:
 
-- `graphicsImages`, `websiteImages`, `funnelImages`, `automationImages`, `socialImages`: image URLs, one per card
+- `graphicsImages`, `websiteImages`, `funnelImages`, `automationImages`: image URLs, one per card
 - `reelVideoLinks`: MP4 URLs for the Reels tab
 - `websiteLiveLinks`, `funnelLiveLinks`: live URLs, matched by position to the preview images

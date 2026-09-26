@@ -49,7 +49,6 @@ const projectCatalog = {
   websites: { label: 'Websites', subtitle: 'Website design and development', names: ['Aster Studio', 'North & Co.', 'Lumina Health', 'Vault Digital', 'Maison Edit', 'Vista Works'] },
   funnels: { label: 'Funnels', subtitle: 'Lead-generation funnel system', names: ['Lead Flow', 'Launch Path', 'Book More', 'Offer Engine', 'Client Journey', 'Conversion Suite'] },
   automation: { label: 'Automation', subtitle: 'CRM and workflow automation', names: ['Smart Pipeline', 'Follow-Up Flow', 'Booking Engine', 'Lead Router', 'Client Onboard', 'Growth System'] },
-  socials: { label: 'Socials', subtitle: 'Social media content system', names: ['Content House', 'Daily Story', 'Social Edit', 'Community Flow', 'Brand Voice', 'Campaign Grid'] }
 };
 
 /* ============================================================
@@ -166,33 +165,6 @@ const automationImages = [
  
 ];
 
-const socialImages = [
-  'https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=2400&q=95&sig=401', // Socials 01
-  'https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=2400&q=95&sig=402', // Socials 02
-  'https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=2400&q=95&sig=403', // Socials 03
-  'https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=2400&q=95&sig=404', // Socials 04
-  'https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=2400&q=95&sig=405', // Socials 05
-  'https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=2400&q=95&sig=406', // Socials 06
-  'https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=2400&q=95&sig=407', // Socials 07
-  'https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=2400&q=95&sig=408', // Socials 08
-  'https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=2400&q=95&sig=409', // Socials 09
-  'https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=2400&q=95&sig=410', // Socials 10
-  'https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=2400&q=95&sig=411', // Socials 11
-  'https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=2400&q=95&sig=412', // Socials 12
-  'https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=2400&q=95&sig=413', // Socials 13
-  'https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=2400&q=95&sig=414', // Socials 14
-  'https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=2400&q=95&sig=415', // Socials 15
-  'https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=2400&q=95&sig=416', // Socials 16
-  'https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=2400&q=95&sig=417', // Socials 17
-  'https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=2400&q=95&sig=418', // Socials 18
-  'https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=2400&q=95&sig=419', // Socials 19
-  'https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=2400&q=95&sig=420', // Socials 20
-  'https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=2400&q=95&sig=421', // Socials 21
-  'https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=2400&q=95&sig=422', // Socials 22
-  'https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=2400&q=95&sig=423', // Socials 23
-  'https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=2400&q=95&sig=424' // Socials 24
-];
-
 const reelVideoLinks = [
   'https://assets.cdn.filesafe.space/FoDdVxsegLCZtxtLaGhl/media/6a5e7843bc0b1f5d2ee9f97d.mp4', // Reel video 01
   'https://assets.cdn.filesafe.space/FoDdVxsegLCZtxtLaGhl/media/6a5e784bab262a1cfc6efdc3.mp4', // Reel video 02
@@ -216,7 +188,6 @@ const editablePortfolioLinks = {
   websites: websiteImages,
   funnels: funnelImages,
   automation: automationImages,
-  socials: socialImages,
   reels: reelVideoLinks
 };
 
@@ -539,7 +510,7 @@ projects.forEach(card => {
       return;
     }
 
-    // Graphics, Reels, Automation and Socials keep the existing popup.
+    // Graphics, Reels and Automation keep the existing popup.
     event.preventDefault();
     lastFocused = link;
     activeCategory = category;
