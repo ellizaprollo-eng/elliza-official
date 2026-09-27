@@ -1899,3 +1899,81 @@ main, .footer { position: relative; z-index: 1; }
   .clients-strip .client-logos[aria-hidden="true"] { display: none; }
   .clients-strip .client-logos { flex-wrap: wrap; }
 }
+
+/* TOOLS & PLATFORMS LOGO CHIPS
+   Each tool is a pill: a white app-icon tile with the real logo, then the
+   name in the editorial italic. Rows keep their opposite-direction drift. */
+.tools-marquee { padding: 12px 0; }
+
+.tools-marquee-group {
+  list-style: none;
+  margin: 0;
+  padding: 0 18px 0 0;
+  gap: 18px;
+}
+
+.tool-chip {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-shrink: 0;
+  padding: 10px 30px 10px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: linear-gradient(145deg, rgba(246,239,231,.07), rgba(246,239,231,.015));
+  transition: border-color .35s ease, background .35s ease, transform .35s cubic-bezier(.16,1,.3,1);
+}
+
+.tools-marquee .tool-icon {
+  width: 64px;
+  height: 64px;
+  flex: 0 0 64px;
+  display: grid;
+  place-items: center;
+  padding: 12px;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 10px 26px rgba(0,0,0,.38), inset 0 0 0 1px rgba(0,0,0,.04);
+  overflow: hidden;
+  transition: transform .45s cubic-bezier(.16,1,.3,1);
+}
+
+.tools-marquee .tool-icon.is-full { padding: 0; }
+
+.tool-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+
+.tool-icon.is-full img { object-fit: cover; mix-blend-mode: normal; }
+
+.tools-marquee .tool-name {
+  padding: 0;
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+  font-size: clamp(28px, 3.4vw, 50px);
+  line-height: 1;
+  letter-spacing: -.035em;
+  color: var(--text);
+  transition: color .3s ease;
+}
+
+@media (hover: hover) {
+  .tool-chip:hover {
+    border-color: rgba(200,120,88,.55);
+    background: linear-gradient(145deg, rgba(200,120,88,.14), rgba(246,239,231,.02));
+    transform: translateY(-3px);
+  }
+  .tool-chip:hover .tool-icon { transform: rotate(-6deg) scale(1.06); }
+  .tool-chip:hover .tool-name { color: var(--accent-soft); }
+}
+
+@media (max-width: 700px) {
+  .tools-marquee-group { gap: 12px; padding-right: 12px; }
+  .tool-chip { gap: 12px; padding: 7px 20px 7px 7px; }
+  .tools-marquee .tool-icon { width: 46px; height: 46px; flex-basis: 46px; padding: 9px; border-radius: 15px; }
+  .tools-marquee .tool-icon.is-full { padding: 0; }
+  .tools-marquee .tool-name { font-size: 24px; }
+}
