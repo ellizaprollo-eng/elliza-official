@@ -1978,18 +1978,12 @@ main, .footer { position: relative; z-index: 1; }
   .tools-marquee .tool-name { font-size: 24px; }
 }
 
-/* FEATURED CLIENT REVIEW
-   The long, real review spans the full row; the shorter cards sit below. */
-@media (min-width: 981px) {
-  .testimonials { grid-template-columns: repeat(2, 1fr); }
-  .quote-card-long { grid-column: 1 / -1; min-height: 0; }
-}
-
+/* CLIENT REVIEWS: three equal boxes in one row.
+   Long reviews use a smaller quote size so the cards stay balanced. */
 .quote-card-long p {
-  max-width: 980px;
-  margin-bottom: 28px;
-  font-size: clamp(17px, 1.7vw, 22px);
-  line-height: 1.5;
+  font-size: 15px;
+  line-height: 1.55;
+  margin-bottom: 24px;
 }
 
 .quote-card-long footer {
