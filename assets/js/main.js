@@ -946,3 +946,19 @@ if (processSection && processPin && processTrack && !window.matchMedia('(prefers
   window.addEventListener('load', measureProcessPin);
   measureProcessPin();
 }
+
+// Review screenshots open full size in a dialog.
+const reviewDialog = document.getElementById('reviewDialog');
+const reviewDialogImage = document.getElementById('reviewDialogImage');
+if (reviewDialog && reviewDialog.showModal) {
+  document.querySelectorAll('.review-shot').forEach(button => {
+    button.addEventListener('click', () => {
+      const img = button.querySelector('img');
+      reviewDialogImage.src = button.dataset.reviewSrc;
+      reviewDialogImage.alt = img.alt;
+      reviewDialog.showModal();
+    });
+  });
+  document.getElementById('reviewDialogClose').addEventListener('click', () => reviewDialog.close());
+  reviewDialog.addEventListener('click', event => { if (event.target === reviewDialog) reviewDialog.close(); });
+}

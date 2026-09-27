@@ -343,10 +343,14 @@
             <button type="button" id="testimonialNext" aria-label="Next testimonial">→</button>
           </div>
           <div class="testimonials">
-          <blockquote class="quote-card quote-card-long reveal">
-            <p>“Working with Elliza Olivina has been an absolute game-changer for our team! As a GHL expert, she not only brought incredible knowledge to the table but also executed tasks with precision and efficiency. Elliza needed very little oversight, which made the whole process smooth and stress-free. Her ability to understand our requirements and implement custom workflows and snapshots quickly was impressive. If you're looking for someone who can get the job done right the first time, I highly recommend Elliza! Will definitely keep in touch with Elliza for future projects.”</p>
-            <footer><span class="quote-avatar" aria-hidden="true">C</span><span><strong>Crimson S.</strong>October 29, 2024</span></footer>
-          </blockquote>
+          <figure class="quote-card review-shot-card reveal">
+            <div class="review-shot-label">Verified client review</div>
+            <button class="review-shot" type="button" data-review-src="assets/images/reviews/crimson-s-review.png" aria-label="View Crimson S. review full size">
+              <img src="assets/images/reviews/crimson-s-review.png" alt="Client review from Crimson S., October 29, 2024: Working with Elliza Olivina has been an absolute game-changer for our team! As a GHL expert, she not only brought incredible knowledge to the table but also executed tasks with precision and efficiency. Elliza needed very little oversight, which made the whole process smooth and stress-free. Her ability to understand our requirements and implement custom workflows and snapshots quickly was impressive. If you are looking for someone who can get the job done right the first time, I highly recommend Elliza! Will definitely keep in touch with Elliza for future projects." width="747" height="223" loading="lazy" decoding="async">
+              <span class="review-shot-hint">Tap to view full review</span>
+            </button>
+            <figcaption><span class="quote-avatar" aria-hidden="true">C</span><span><strong>Crimson S.</strong>October 29, 2024</span></figcaption>
+          </figure>
 
           <blockquote class="quote-card reveal">
             <p>“The new marketing system finally connected everything. Leads are organized, follow-ups are faster, and the team saves hours each week.”</p>
@@ -438,6 +442,12 @@
       <button class="modal-nav modal-next" id="modalNext" type="button" aria-label="Next item">›</button>
     </div>
   </div>
+
+
+  <dialog class="review-dialog" id="reviewDialog" aria-label="Client review">
+    <button class="review-dialog-close" type="button" id="reviewDialogClose" aria-label="Close review">×</button>
+    <img id="reviewDialogImage" alt="">
+  </dialog>
 
   <script src="assets/js/main.js"></script>
 </body>
