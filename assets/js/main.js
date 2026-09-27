@@ -877,7 +877,6 @@ if (window.matchMedia('(pointer:fine)').matches) {
   });
 }
 
-document.getElementById('year').textContent = new Date().getFullYear();
   
 // Hand cursor and click-drag scrolling for the process cards.
 const processViewport = document.getElementById('processViewport');
