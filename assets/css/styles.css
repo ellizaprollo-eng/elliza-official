@@ -488,13 +488,6 @@ button, input, textarea { font: inherit; }
 
 .center-action { text-align: center; margin-top: 54px; }
 
-.work-count-note {
-  margin: 0 auto;
-  max-width: 560px;
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.7;
-}
 
 
 /* WEBSITE + FUNNEL AUTO-SCROLL PREVIEWS
