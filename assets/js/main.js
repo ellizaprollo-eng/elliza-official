@@ -227,7 +227,7 @@ projectsGrid.innerHTML = projectItems.map(item => `
       <div class="project-image">
         ${item.category === 'reels'
           ? `<video muted playsinline preload="metadata" aria-label="Reel preview"><source src="${item.video}" type="video/mp4"></video><span class="reel-play-badge" aria-hidden="true">▶</span>`
-          : `<img class="${item.category === 'websites' || item.category === 'funnels' ? 'website-scroll-image' : ''}" src="${item.image}" alt="Portfolio work" loading="lazy" decoding="async" draggable="false">`
+          : `<img class="${item.category === 'websites' || item.category === 'funnels' ? 'website-scroll-image' : ''}" src="${item.image}" alt="${item.subtitle} ${item.title.slice(-2)} by Elliza Olvina" loading="lazy" decoding="async" draggable="false">`
         }
       </div>
     </a>
@@ -483,7 +483,7 @@ function showModalItem(index, direction = 0) {
     modalVideo.style.display = 'none';
     modalImage.style.display = 'block';
     modalImage.src = item.fullImage || item.image;
-    modalImage.alt = websitePreview ? 'Full website or funnel design preview' : 'Portfolio work';
+    modalImage.alt = `${item.subtitle} by Elliza Olvina`;
     if (websitePreview) {
       if (modalImage.complete) requestAnimationFrame(updateModalWebsitePreview);
     } else {
@@ -771,7 +771,7 @@ if (servicesSecondary) {
   function illuminateServiceWords() {
     const rect = servicesSecondary.getBoundingClientRect();
     const start = window.innerHeight * .90;
-    const end = window.innerHeight * .24;
+    const end = window.innerHeight * .5;
     const progress = Math.max(0, Math.min(1, (start - rect.top) / (start - end)));
     const litCount = Math.ceil(progress * revealWords.length);
     revealWords.forEach((word, index) => word.classList.toggle('is-lit', index < litCount));

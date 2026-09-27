@@ -1392,10 +1392,10 @@ body.is-ready .nav-wrap {
   display: inline-block;
   opacity: .13;
   transform: translateY(.15em);
-  transition: opacity .25s linear, transform .25s linear;
+  transition: opacity .25s linear, transform .25s linear, color .35s ease;
 }
 
-.reveal-word.is-lit { opacity: 1; transform: translateY(0); }
+.reveal-word.is-lit { opacity: 1; transform: translateY(0); color: var(--text); }
 
 .tool-cloud span {
   display: inline-block;
