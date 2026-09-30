@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://elliza-official.vercel.app/sitemap.xml
+Sitemap: https://elliza-digital.vercel.app/sitemap.xml
