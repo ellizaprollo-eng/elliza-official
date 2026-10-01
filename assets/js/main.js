@@ -962,3 +962,47 @@ if (reviewDialog && reviewDialog.showModal) {
   document.getElementById('reviewDialogClose').addEventListener('click', () => reviewDialog.close());
   reviewDialog.addEventListener('click', event => { if (event.target === reviewDialog) reviewDialog.close(); });
 }
+
+// Hero work wall: tiles open the same project viewer as the Featured work cards,
+// and the reel loops play only while they are on screen.
+(() => {
+  const wall = document.querySelector('.hero-wall');
+  if (!wall) return;
+
+  wall.querySelectorAll('.wall-tile').forEach(tile => {
+    tile.addEventListener('click', () => {
+      const cards = [...projects].filter(card => card.dataset.category === tile.dataset.open);
+      const link = cards[Number(tile.dataset.index)]?.querySelector('a');
+      if (!link) return;
+      link.click();
+      // Return focus to the tile, so closing the viewer does not jump to the work section.
+      lastFocused = tile;
+    });
+
+    if (window.matchMedia('(pointer:fine)').matches) {
+      tile.addEventListener('mouseenter', () => {
+        projectBubble.textContent = tile.dataset.open === 'reels' ? 'Play' : 'View';
+        projectBubble.classList.add('show');
+      });
+      tile.addEventListener('mousemove', event => {
+        bubbleTargetX = event.clientX;
+        bubbleTargetY = event.clientY;
+        startProjectBubble();
+      });
+      tile.addEventListener('mouseleave', () => {
+        projectBubble.classList.remove('show');
+        projectBubble.textContent = 'View';
+      });
+    }
+  });
+
+  const videos = [...wall.querySelectorAll('video')];
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+  const videoObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.play().catch(() => {});
+      else entry.target.pause();
+    });
+  }, { threshold: .15 });
+  videos.forEach(video => videoObserver.observe(video));
+})();

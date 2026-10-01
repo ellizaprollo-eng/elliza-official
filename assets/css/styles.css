@@ -2099,3 +2099,137 @@ main, .footer { position: relative; z-index: 1; }
 @media (min-width: 981px) {
   .testimonials { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
+
+/* HERO WORK WALL
+   Three lanes of Elliza's real graphics and reels drift beside the headline,
+   two sideways rows on tablets and phones. Tiles open the project viewer. */
+.hero-main { min-width: 0; }
+
+@media (min-width: 981px) {
+  .hero { padding: 128px 0 64px; }
+  .hero-grid {
+    grid-template-columns: minmax(0, 1.06fr) minmax(0, .94fr);
+    align-items: center;
+    gap: clamp(36px, 4.4vw, 72px);
+  }
+  .hero h1 { font-size: clamp(58px, 6.2vw, 98px); line-height: 1.12; }
+  .hero-copy { margin-top: 40px; padding-bottom: 0; }
+}
+
+.hero-wall {
+  position: relative;
+  height: clamp(520px, calc(100svh - 160px), 780px);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 10%, #000 90%, transparent);
+          mask-image: linear-gradient(to bottom, transparent, #000 10%, #000 90%, transparent);
+  opacity: 0;
+  transition: opacity 1.1s ease .35s;
+}
+body.is-ready .hero-wall { opacity: 1; }
+
+.wall-lane { min-width: 0; }
+.wall-track {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  animation: wall-up 60s linear infinite;
+  will-change: transform;
+}
+.lane-2 .wall-track { animation-name: wall-down; animation-duration: 70s; }
+.lane-3 .wall-track { animation-duration: 54s; }
+.hero-wall:hover .wall-track { animation-play-state: paused; }
+@keyframes wall-up { to { transform: translate3d(0, calc(-50% - 7px), 0); } }
+@keyframes wall-down { from { transform: translate3d(0, calc(-50% - 7px), 0); } to { transform: none; } }
+
+.wall-tile {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  color: inherit;
+  background: var(--card);
+  border: 1px solid rgba(242,230,216,.12);
+  border-radius: 18px;
+  box-shadow: 0 18px 44px rgba(0,0,0,.45);
+  transition: transform .35s cubic-bezier(.16,1,.3,1), border-color .3s ease, box-shadow .3s ease;
+}
+.wall-tile:hover {
+  transform: scale(1.03);
+  border-color: rgba(200,120,88,.6);
+  box-shadow: 0 22px 54px rgba(0,0,0,.55), 0 0 0 1px rgba(200,120,88,.25);
+}
+.wall-tile:focus { outline: none; }
+.wall-tile img { width: 100%; height: auto; }
+.wall-tile video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  object-fit: cover;
+  background: #15110f;
+}
+.wall-tag {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 11px;
+  border-radius: 999px;
+  font: 700 10px/1 "DM Sans", sans-serif;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #0b0908;
+  background: rgba(246,239,231,.94);
+  box-shadow: 0 6px 16px rgba(0,0,0,.28);
+}
+.is-reel .wall-tag { color: #140d09; background: var(--accent); }
+.is-reel .wall-tag::before {
+  content: "";
+  border-left: 7px solid currentColor;
+  border-top: 4.5px solid transparent;
+  border-bottom: 4.5px solid transparent;
+}
+
+@media (max-width: 980px) {
+  .hero-grid { gap: 52px; }
+  .hero-copy { margin-top: 56px; }
+  .hero-wall {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 0 calc(50% - 50vw);
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+            mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  }
+  .wall-lane { height: clamp(190px, 44vw, 300px); }
+  .lane-3 { display: none; }
+  .wall-track {
+    flex-direction: row;
+    width: max-content;
+    height: 100%;
+    gap: 12px;
+    animation-name: wall-left;
+    animation-duration: 58s;
+  }
+  .lane-2 .wall-track { animation-name: wall-right; animation-duration: 66s; }
+  .wall-tile { width: auto; height: 100%; flex: none; border-radius: 14px; }
+  .wall-tile img,
+  .wall-tile video { width: auto; height: 100%; }
+  @keyframes wall-left { to { transform: translate3d(calc(-50% - 6px), 0, 0); } }
+  @keyframes wall-right { from { transform: translate3d(calc(-50% - 6px), 0, 0); } to { transform: none; } }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wall-track { animation: none !important; }
+  .hero-wall { transition: none; }
+}
+@media (prefers-reduced-motion: reduce) and (max-width: 980px) {
+  .wall-lane { overflow-x: auto; }
+}
