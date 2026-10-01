@@ -2242,3 +2242,43 @@ body.is-ready .hero-wall { opacity: 1; }
 @media (prefers-reduced-motion: reduce) and (max-width: 980px) {
   .wall-lane { overflow-x: auto; }
 }
+
+/* TYPE SCALE UNDER THE HERO
+   --hero-fs tracks the hero headline size (see the three-line rule above).
+   Section headings stay at most 80% of it, the contact heading 90%,
+   so nothing below the first screen is bigger than the hero. */
+:root { --hero-fs: 82px; }
+@media (min-width: 981px) and (max-width: 1280px) {
+  :root { --hero-fs: calc(6.72vw - 2.5px); }
+}
+@media (min-width: 701px) and (max-width: 980px) {
+  :root { --hero-fs: min(118px, calc((100vw - 40px) * .126)); }
+}
+@media (max-width: 700px) {
+  :root { --hero-fs: max(34px, calc((100vw - 28px) * .126)); }
+}
+
+.about-content h2 { font-size: min(clamp(42px, 5vw, 76px), calc(var(--hero-fs) * .8)); }
+.work-head h2 { font-size: min(clamp(50px, 7vw, 94px), calc(var(--hero-fs) * .8)); }
+.services-intro { font-size: min(clamp(45px, 6.5vw, 92px), calc(var(--hero-fs) * .8)); }
+.section-title { font-size: min(clamp(42px, 6vw, 88px), calc(var(--hero-fs) * .8)); }
+.process-card-number { font-size: min(clamp(56px, 7vw, 88px), calc(var(--hero-fs) * .8)); }
+@media (max-height: 820px) {
+  .is-pinned .process-heading .section-title { font-size: min(clamp(38px, 8vh, 64px), calc(var(--hero-fs) * .8)); }
+  .is-pinned .process-card-number { font-size: min(clamp(44px, 8vh, 72px), calc(var(--hero-fs) * .8)); }
+}
+.cta h2 { font-size: min(clamp(58px, 8vw, 120px), calc(var(--hero-fs) * .9)); }
+.cta-star { font-size: min(52px, calc(var(--hero-fs) * .7)); }
+
+/* Tools & platforms: smaller chips so the logos read as a supporting row. */
+.tools-marquee-group { gap: 14px; padding-right: 14px; }
+.tool-chip { gap: 12px; padding: 7px 22px 7px 7px; }
+.tools-marquee .tool-icon { width: 44px; height: 44px; flex-basis: 44px; padding: 9px; border-radius: 14px; }
+.tools-marquee .tool-icon.is-full { padding: 0; }
+.tools-marquee .tool-name { font-size: clamp(20px, 1.8vw, 26px); }
+@media (max-width: 700px) {
+  .tools-marquee-group { gap: 10px; padding-right: 10px; }
+  .tool-chip { gap: 10px; padding: 6px 16px 6px 6px; }
+  .tools-marquee .tool-icon { width: 36px; height: 36px; flex-basis: 36px; padding: 7px; border-radius: 11px; }
+  .tools-marquee .tool-name { font-size: 18px; }
+}
