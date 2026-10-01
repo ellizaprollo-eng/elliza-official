@@ -2103,16 +2103,25 @@ main, .footer { position: relative; z-index: 1; }
 /* HERO WORK WALL
    Three lanes of Elliza's real graphics and reels drift beside the headline,
    two sideways rows on tablets and phones. Tiles open the project viewer. */
-.hero-main { min-width: 0; }
+.hero-main { min-width: 0; container-type: inline-size; }
+
+/* Headline stays on exactly three lines: the size follows the column width
+   (the widest line, "digital experiences", is 7.59 times the font size). */
+.hero h1 {
+  max-width: none;
+  font-size: clamp(34px, 5.6vw, 84px);
+  font-size: clamp(34px, 12.6cqi, 118px);
+  line-height: 1.12;
+}
+.hero h1 .hero-line { white-space: nowrap; }
 
 @media (min-width: 981px) {
   .hero { padding: 128px 0 64px; }
   .hero-grid {
-    grid-template-columns: minmax(0, 1.06fr) minmax(0, .94fr);
+    grid-template-columns: minmax(0, 1.12fr) minmax(0, .88fr);
     align-items: center;
     gap: clamp(36px, 4.4vw, 72px);
   }
-  .hero h1 { font-size: clamp(58px, 6.2vw, 98px); line-height: 1.12; }
   .hero-copy { margin-top: 40px; padding-bottom: 0; }
 }
 
