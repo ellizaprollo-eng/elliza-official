@@ -1,0 +1,106 @@
+{
+  "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/:path(assets/(?:images/hero-wall|video/hero-wall)/.*)",
+      "has": [
+        {
+          "type": "header",
+          "key": "sec-fetch-mode",
+          "value": "navigate"
+        }
+      ],
+      "missing": [
+        {
+          "type": "cookie",
+          "key": "wp_unlock",
+          "value": "__WP_UNLOCK_TOKEN__"
+        }
+      ],
+      "destination": "/unlock?next=/:path",
+      "permanent": false
+    },
+    {
+      "source": "/:path(assets/(?:images/hero-wall|video/hero-wall)/.*)",
+      "has": [
+        {
+          "type": "header",
+          "key": "sec-fetch-site",
+          "value": "cross-site"
+        }
+      ],
+      "missing": [
+        {
+          "type": "cookie",
+          "key": "wp_unlock",
+          "value": "__WP_UNLOCK_TOKEN__"
+        }
+      ],
+      "destination": "/unlock?next=/:path",
+      "permanent": false
+    },
+    {
+      "source": "/:path(assets/(?:images/hero-wall|video/hero-wall)/.*.(?:webp|jpe?g|png|gif|avif))",
+      "missing": [
+        {
+          "type": "header",
+          "key": "sec-fetch-mode"
+        },
+        {
+          "type": "header",
+          "key": "referer",
+          "value": {
+            "pre": "https://elliza"
+          }
+        },
+        {
+          "type": "cookie",
+          "key": "wp_unlock",
+          "value": "__WP_UNLOCK_TOKEN__"
+        }
+      ],
+      "destination": "/unlock?next=/:path",
+      "permanent": false
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        }
+      ]
+    },
+    {
+      "source": "/:path(assets/(?:images/hero-wall|video/hero-wall)/.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, no-cache"
+        },
+        {
+          "key": "Cross-Origin-Resource-Policy",
+          "value": "same-origin"
+        },
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, noimageindex"
+        }
+      ]
+    }
+  ]
+}

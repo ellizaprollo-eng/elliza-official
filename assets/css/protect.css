@@ -1,0 +1,6 @@
+/* View-only samples (2026-10-03): pairs with protect.js */
+body { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+input, textarea, select, [contenteditable="true"] { -webkit-user-select: text; user-select: text; }
+img, video { -webkit-user-drag: none; -webkit-touch-callout: none; }
+html.wp-shield img, html.wp-shield video, html.wp-shield iframe, html.wp-shield canvas, html.wp-shield picture { filter: blur(24px) !important; transition: filter .12s ease; }
+@media print { html, body { display: none !important; } }

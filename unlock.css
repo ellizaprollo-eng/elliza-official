@@ -1,0 +1,19 @@
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; }
+body { min-height: 100vh; display: grid; place-items: center; padding: 24px 16px; background: #f4f2ee; color: #141316; font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; }
+.lock { width: 100%; max-width: 440px; background: #fff; border: 1px solid #dcd7ce; border-radius: 18px; padding: 32px 28px; box-shadow: 0 24px 48px -32px rgba(20, 19, 22, .55); }
+.lock-icon { width: 52px; height: 52px; display: grid; place-items: center; border-radius: 14px; background: #141316; color: #fff; margin-bottom: 18px; }
+h1 { margin: 0 0 8px; font-size: 1.5rem; line-height: 1.2; letter-spacing: -.01em; }
+.lead { margin: 0 0 22px; color: #55525c; font-size: .97rem; }
+.lock-form { display: grid; gap: 8px; }
+label { font-weight: 600; font-size: .92rem; }
+input[type="password"] { width: 100%; min-height: 48px; padding: 0 14px; border: 1px solid #c9c3b8; border-radius: 10px; font: inherit; color: inherit; background: #fff; }
+input[type="password"]:focus-visible { outline: 3px solid #2f4bff; outline-offset: 1px; border-color: #2f4bff; }
+.lock-error { margin: 2px 0 0; color: #b42318; font-size: .9rem; }
+button { margin-top: 8px; min-height: 48px; border: 0; border-radius: 999px; background: #141316; color: #fff; font: 600 1rem/1 inherit; font-family: inherit; cursor: pointer; }
+button:hover { background: #2f4bff; }
+button:focus-visible { outline: 3px solid #2f4bff; outline-offset: 2px; }
+.lock-links { margin: 20px 0 0; display: flex; flex-wrap: wrap; gap: 8px; font-size: .93rem; }
+.lock-links a { color: #141316; text-underline-offset: 3px; }
+.lock-links span { color: #9a958c; }
+.lock-note { margin: 18px 0 0; color: #77727c; font-size: .8rem; }
