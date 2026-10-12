@@ -1,0 +1,91 @@
+/* "Start here" intro film popup (assets/js/intro.js), same idea as the popup on wovie-certified,
+   in Elliza's colours. The film is built in Downloads/elliza-process-video (HyperFrames). */
+
+.intro-dlg {
+  width: min(1100px, 94vw, calc((100dvh - 190px) * 1.7778));
+  max-width: none;
+  max-height: none;
+  margin: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  overflow: visible;
+  cursor: default; /* the site's custom cursor sits under the popup, so the real one comes back here */
+}
+.intro-dlg::backdrop { background: rgba(8, 6, 5, .82); backdrop-filter: blur(6px); cursor: default; }
+.intro-in {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 24px;
+  background: #15110f;
+  box-shadow: 0 0 0 1px rgba(242, 230, 216, .14), 0 40px 80px -40px rgba(0, 0, 0, .8);
+  font-family: "DM Sans", sans-serif;
+}
+.intro-in:focus { outline: none; }
+.intro-top { display: flex; align-items: center; gap: 8px; }
+.intro-pill {
+  padding: 9px 13px;
+  border-radius: 999px;
+  background: rgba(200, 120, 88, .16);
+  color: var(--accent-soft);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.intro-skip,
+.intro-x {
+  border: 1px solid rgba(224, 205, 184, .38);
+  background: rgba(224, 205, 184, .035);
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color .25s ease;
+}
+.intro-skip {
+  margin-left: auto;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font: 700 12px/1.2 "DM Sans", sans-serif;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.intro-x { width: 38px; height: 38px; flex: none; display: grid; place-items: center; border-radius: 50%; font-size: 22px; line-height: 1; }
+.intro-skip:hover,
+.intro-x:hover { border-color: var(--accent); }
+.intro-skip:focus-visible,
+.intro-x:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.intro-wrap video { display: block; width: 100%; aspect-ratio: 16 / 9; border-radius: 14px; background: #0b0908; cursor: auto; }
+.intro-cap { margin: 0 4px 2px; color: var(--muted); font-size: 14px; line-height: 1.5; }
+/* The intro is public: keep it sharp when protect.js blurs the samples. */
+html.wp-shield .intro-dlg video { filter: none !important; }
+
+@media (max-width: 700px) {
+  .intro-in { padding: 10px; gap: 10px; border-radius: 18px; }
+  .intro-skip { padding: 9px 13px; }
+  .intro-cap { font-size: 13px; }
+}
+
+/* "Watch how I work" under the Process intro */
+.intro-watch {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+  padding: 6px 18px 6px 6px;
+  border: 1px solid rgba(224, 205, 184, .38);
+  border-radius: 999px;
+  background: rgba(224, 205, 184, .035);
+  color: var(--text);
+  font: 700 12px/1 "DM Sans", sans-serif;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  transition: border-color .25s ease, transform .25s ease;
+}
+.intro-watch:hover { border-color: var(--accent); transform: translateY(-2px); }
+.intro-watch .pl { width: 34px; height: 34px; flex: none; border-radius: 50%; background: var(--accent); display: grid; place-items: center; }
+.intro-watch .pl svg { width: 12px; height: 12px; margin-left: 2px; fill: #fff; }
+.intro-watch .len { color: var(--muted); font-weight: 600; }
