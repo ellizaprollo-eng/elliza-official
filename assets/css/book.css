@@ -29,3 +29,8 @@
   .calendly-inline-widget { height: 1000px; }
   .book-frame { border-radius: 16px; }
 }
+
+/* the homepage nav is fixed at the top, so the page starts below it */
+.book-page .book { padding-top: 150px; }
+.book-page .book-cal { scroll-margin-top: 110px; }
+@media (max-width: 640px) { .book-page .book { padding-top: 112px; } }
