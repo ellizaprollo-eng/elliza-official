@@ -26,8 +26,6 @@
 .wa-fab.is-open .wa-x { display: block; }
 .wa-dot { position: absolute; top: 3px; right: 3px; width: 13px; height: 13px; border: 2px solid #0b0908; border-radius: 50%; background: #ff4d4f; }
 
-/* the back-to-top button moves up so the two never overlap */
-.back-to-top { bottom: 92px; }
 
 .wa-panel {
   position: fixed;
@@ -98,7 +96,6 @@
 }
 @media (max-width: 480px) {
   .wa-fab { right: 16px; bottom: 16px; }
-  .back-to-top { right: 22px; bottom: 84px; }
   .wa-panel { right: 16px; left: 16px; width: auto; bottom: 84px; max-height: calc(100vh - 110px); overflow-y: auto; }
 }
 @media (prefers-reduced-motion: reduce) {

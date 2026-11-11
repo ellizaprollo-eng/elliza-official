@@ -9,13 +9,13 @@ function updateScrollUI() {
   const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
   scrollProgress.style.width = `${maxScroll > 0 ? (scrollTop / maxScroll) * 100 : 0}%`;
   navWrap.classList.toggle('scrolled', scrollTop > 20);
-  backToTop.classList.toggle('show', scrollTop > 600);
+  backToTop?.classList.toggle('show', scrollTop > 600); // the button was removed 2026-11-12 (owner)
 }
 
 window.addEventListener('scroll', updateScrollUI, { passive: true });
 updateScrollUI();
 
-backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+backToTop?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
 menuToggle.addEventListener('click', () => {
   navLinks.classList.toggle('open');
