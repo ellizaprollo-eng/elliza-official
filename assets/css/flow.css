@@ -76,3 +76,16 @@
   .sw-row.is-all[data-sw-row~="websites"], .sw-row.is-all[data-sw-row~="funnels"], .sw-row.is-all[data-sw-row~="automation"] { --sw-min: 260px; }
   .sw-desc { font-size: 14px; }
 }
+
+/* ---------- 04 Content calendar (like glaiza.digital): copy on the left, the live sheet preview on the right ---------- */
+.cal-card { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 34px; align-items: center; padding: 28px; border: 1px solid var(--line); border-radius: 24px; background: linear-gradient(160deg, rgba(246,239,231,.05), rgba(246,239,231,.012)); }
+.cal-client { margin: 0 0 12px; color: var(--accent-soft); font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.cal-text { margin: 0 0 18px; color: rgba(246,239,231,.86); font-size: 15px; line-height: 1.7; }
+.cal-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 24px; padding: 0; list-style: none; }
+.cal-tags li { padding: 6px 11px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); font-size: 11px; }
+.cal-shot { display: block; overflow: hidden; border: 1px solid rgba(246,239,231,.16); border-radius: 16px; background: #fff; box-shadow: 0 40px 90px -45px rgba(200,120,88,.5); }
+.cal-shot img { width: 100%; height: auto; transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+.cal-shot:hover img { transform: scale(1.03); }
+@media (max-width: 900px) { .cal-card { grid-template-columns: 1fr; gap: 24px; } .cal-shot { order: -1; } }
+@media (max-width: 700px) { .cal-card { padding: 18px; } .cal-btn { width: 100%; } }
+@media (prefers-reduced-motion: reduce) { .cal-shot:hover img { transform: none; } }
