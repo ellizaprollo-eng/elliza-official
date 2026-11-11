@@ -1,0 +1,64 @@
+/* 2026-11-12, glaiza.digital flow: Results at a glance, the 02 / Sample works channel blocks,
+   and the new headings in Skills & tools and Let's talk. Same palette and fonts as styles.css. */
+
+/* ---------- Results at a glance ---------- */
+.glance { padding: 54px 0 58px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: rgba(246,239,231,.02); }
+.glance-label { display: flex; justify-content: center; margin: 0 0 30px; }
+.glance-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0; padding: 0; list-style: none; }
+.glance-grid li { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 6px 18px; border-left: 1px solid var(--line); text-align: center; }
+.glance-grid li:first-child { border-left: 0; }
+.glance-grid strong { font-family: "Playfair Display", serif; font-size: clamp(40px, 4.4vw, 64px); font-weight: 500; line-height: 1; letter-spacing: -.04em; color: var(--accent-soft); }
+.glance-grid span { max-width: 220px; color: var(--muted); font-size: 10px; font-weight: 700; line-height: 1.6; letter-spacing: .14em; text-transform: uppercase; }
+
+/* ---------- 02 / Sample works ---------- */
+.sw-jump { display: flex; flex-wrap: wrap; gap: 8px; margin: -20px 0 0; }
+.sw-jump a { padding: 9px 13px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; transition: .2s; }
+.sw-jump a:hover, .sw-jump a:focus-visible { border-color: #fff; background: #fff; color: #0a0a0a; }
+
+.sw-block { margin-top: 64px; padding-top: 56px; border-top: 1px solid var(--line); scroll-margin-top: 90px; }
+.sw-top { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; }
+.sw-top h3 { margin: 0; font-size: clamp(30px, 3.2vw, 46px); font-weight: 500; line-height: 1.02; letter-spacing: -.04em; }
+.sw-top h3 .italic { color: var(--accent-soft); }
+.sw-n { display: inline-block; margin-right: 14px; vertical-align: middle; font-family: "DM Sans", sans-serif; font-size: 12px; font-weight: 700; letter-spacing: .14em; color: var(--accent); }
+.sw-side { display: flex; flex: 0 0 auto; align-items: center; gap: 8px; }
+.sw-count { padding: 8px 13px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); font-size: 11px; letter-spacing: .06em; white-space: nowrap; }
+.sw-count b { color: var(--text); font-weight: 700; }
+.sw-arrow { width: 40px; height: 40px; border: 1px solid var(--line); border-radius: 50%; background: transparent; color: var(--text); font-size: 16px; cursor: pointer; transition: .2s; }
+.sw-arrow:hover:not(:disabled) { border-color: var(--accent); background: var(--accent); }
+.sw-arrow:disabled { opacity: .3; cursor: default; }
+.sw-desc { max-width: 640px; margin: 14px 0 26px; color: var(--muted); font-size: 15px; line-height: 1.7; }
+
+.sw-row {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: x proximity;
+  padding-bottom: 14px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(246,239,231,.25) transparent;
+}
+.sw-row > .project-card { flex: 0 0 clamp(230px, 22vw, 300px); scroll-snap-align: start; }
+.sw-row[data-sw-row="reels"] > .project-card,
+.sw-row[data-sw-row="aivideo"] > .project-card { flex-basis: clamp(160px, 15vw, 210px); }
+.sw-row[data-sw-row="websites"] > .project-card,
+.sw-row[data-sw-row="funnels"] > .project-card,
+.sw-row[data-sw-row="automation"] > .project-card { flex-basis: clamp(250px, 26vw, 360px); }
+.sw-row .project-image { height: auto; }
+
+/* ---------- New headings ---------- */
+.tools-marquee-heading .section-title { margin: 20px 0 0; }
+.cta-eyebrow { margin-bottom: 20px; }
+
+@media (max-width: 760px) {
+  .glance { padding: 44px 0 46px; }
+  .glance-grid { grid-template-columns: 1fr 1fr; row-gap: 30px; }
+  .glance-grid li:nth-child(3) { border-left: 0; }
+}
+@media (max-width: 700px) {
+  .sw-jump { margin-top: -14px; }
+  .sw-block { margin-top: 44px; padding-top: 40px; }
+  .sw-top { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .sw-arrow { display: none; }
+  .sw-desc { font-size: 14px; }
+}
