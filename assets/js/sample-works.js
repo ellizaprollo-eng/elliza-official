@@ -26,16 +26,20 @@
   });
 
   const sliders = new Map();
-  function slider(row, prev, next) {
+  function slider(row, prev, next, more) {
     let pos = row.scrollLeft, written = pos, auto = false, inView = false, hover = false, focus = false, touching = false;
-    let holdUntil = 0, tween = null, last = 0, raf = 0;
+    let holdUntil = 0, tween = null, last = 0, raf = 0, expanded = false;
+    const block = row.closest('.sw-block');
+    [...row.children].forEach((c, i) => { c.dataset.swI = i; }); // original order, restored when "View Sample Works" opens the grid
     const gap = () => parseFloat(getComputedStyle(row).columnGap) || 0;
 
     // Endless loop needs at least one card's width of spare scroll room.
     const measure = () => {
       const first = row.firstElementChild;
-      auto = !reduce && !!first && row.scrollWidth - row.clientWidth >= first.offsetWidth + gap() + 2;
+      const room = row.scrollWidth - row.clientWidth;
+      auto = !reduce && !expanded && !!first && room >= first.offsetWidth + gap() + 2;
       row.classList.toggle('is-auto', auto);
+      if (more) more.parentElement.hidden = !expanded && room <= 2; // nothing hidden off to the side: no button needed
       pos = row.scrollLeft;
       written = pos;
       sync();
@@ -77,6 +81,7 @@
 
     const frame = (t) => {
       raf = 0;
+      if (expanded) return;
       const dt = last ? Math.min(0.05, (t - last) / 1000) : 0;
       last = t;
       if (tween) {
@@ -101,6 +106,28 @@
     };
     if (prev) prev.addEventListener('click', () => step(-1));
     if (next) next.addEventListener('click', () => step(1));
+
+    // "View Sample Works": the row stops and opens into a grid of every sample in it, first one first.
+    // "Show less" closes it back into the sliding row and returns to the top of the block.
+    if (more) more.addEventListener('click', () => {
+      expanded = !expanded;
+      tween = null;
+      if (expanded) [...row.children].sort((a, b) => a.dataset.swI - b.dataset.swI).forEach((c) => row.append(c));
+      row.classList.toggle('is-all', expanded);
+      if (block) block.classList.toggle('is-all', expanded);
+      more.setAttribute('aria-expanded', String(expanded));
+      more.querySelector('.sw-more-label').textContent = expanded ? 'Show less' : 'View Sample Works';
+      more.querySelector('.sw-more-icon').textContent = expanded ? '↑' : '→';
+      row.scrollLeft = 0;
+      pos = 0;
+      written = 0;
+      measure();
+      if (!expanded) {
+        (block || row).scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+        kick();
+      }
+      window.dispatchEvent(new Event('resize')); // main.js re-measures the website and funnel previews at their new size
+    });
 
     // A scroll we did not write ourselves is the visitor swiping or using the trackpad: follow it and wait.
     row.addEventListener('scroll', () => {
@@ -131,7 +158,10 @@
     ...rows.map((row) => [row, row.closest('.sw-block')]),
     ...[...document.querySelectorAll('.adr-row')].map((row) => [row, null]),
   ];
-  targets.forEach(([row, block]) => sliders.set(row, slider(row, block && block.querySelector('.sw-prev'), block && block.querySelector('.sw-next'))));
+  targets.forEach(([row, block]) => {
+    const pick = (s) => (block ? block.querySelector(s) : null) || (row.closest('.sw-block') ? row.closest('.sw-block').querySelector(s) : null);
+    sliders.set(row, slider(row, pick('.sw-prev'), pick('.sw-next'), pick('.sw-more-btn')));
+  });
 
   const io = new IntersectionObserver((entries) => entries.forEach((e) => sliders.get(e.target).show(e.isIntersecting)));
   sliders.forEach((_, row) => io.observe(row));

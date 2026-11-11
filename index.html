@@ -116,7 +116,7 @@
   <link rel="stylesheet" href="assets/css/protect.css?v=20261003a">
   <link rel="stylesheet" href="assets/css/builds.css?v=20261112a">
   <link rel="stylesheet" href="assets/css/ai-ads.css?v=20261112b">
-  <link rel="stylesheet" href="assets/css/flow.css?v=20261112e">
+  <link rel="stylesheet" href="assets/css/flow.css?v=20261112f">
 </head>
 <body class="is-loading">
   <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="icon-whatsapp" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></symbol></svg>
@@ -366,28 +366,31 @@
         <div class="sw-block reveal" id="sw-graphics">
           <div class="sw-top">
             <h3 class="serif"><span class="sw-n">01</span>Social media <span class="italic">graphics</span></h3>
-            <div class="sw-side"><span class="sw-count"><b data-sw-count="graphics">24</b> designs</span><button class="sw-arrow sw-prev" type="button" aria-label="Scroll back">←</button><button class="sw-arrow sw-next" type="button" aria-label="Scroll forward">→</button></div>
+            <div class="sw-side"><span class="sw-count"><b data-sw-count="graphics">24</b> designs</span></div>
           </div>
           <p class="sw-desc">Brand and campaign graphics: social posts, carousels and ad creatives. Click any design to see it full size.</p>
-          <div class="sw-row" data-sw-row="graphics"></div>
+          <div class="sw-row" id="sw-row-graphics" data-sw-row="graphics"></div>
+          <div class="sw-more"><button class="btn sw-more-btn" type="button" aria-expanded="false" aria-controls="sw-row-graphics"><span class="sw-more-label">View Sample Works</span><span class="sw-more-icon" aria-hidden="true">→</span></button></div>
         </div>
 
         <div class="sw-block reveal" id="sw-reels">
           <div class="sw-top">
             <h3 class="serif"><span class="sw-n">02</span>Short-form <span class="italic">reels</span></h3>
-            <div class="sw-side"><span class="sw-count"><b data-sw-count="reels">15</b> reels</span><button class="sw-arrow sw-prev" type="button" aria-label="Scroll back">←</button><button class="sw-arrow sw-next" type="button" aria-label="Scroll forward">→</button></div>
+            <div class="sw-side"><span class="sw-count"><b data-sw-count="reels">15</b> reels</span></div>
           </div>
           <p class="sw-desc">Vertical reels with strong hooks, clean pacing and captions. Click any reel to play it with sound.</p>
-          <div class="sw-row" data-sw-row="reels"></div>
+          <div class="sw-row" id="sw-row-reels" data-sw-row="reels"></div>
+          <div class="sw-more"><button class="btn sw-more-btn" type="button" aria-expanded="false" aria-controls="sw-row-reels"><span class="sw-more-label">View Sample Works</span><span class="sw-more-icon" aria-hidden="true">→</span></button></div>
         </div>
 
         <div class="sw-block reveal" id="sw-aivideo">
           <div class="sw-top">
             <h3 class="serif"><span class="sw-n">03</span>AI video and <span class="italic">UGC ads</span></h3>
-            <div class="sw-side"><span class="sw-count"><b data-sw-count="aivideo">64</b> videos</span><button class="sw-arrow sw-prev" type="button" aria-label="Scroll back">←</button><button class="sw-arrow sw-next" type="button" aria-label="Scroll forward">→</button></div>
+            <div class="sw-side"><span class="sw-count"><b data-sw-count="aivideo">64</b> videos</span></div>
           </div>
           <p class="sw-desc">Client video ads, short-form edits and AI UGC concept ads. Hover to preview, click to watch with sound.</p>
-          <div class="sw-row" data-sw-row="aivideo"></div>
+          <div class="sw-row" id="sw-row-aivideo" data-sw-row="aivideo"></div>
+          <div class="sw-more"><button class="btn sw-more-btn" type="button" aria-expanded="false" aria-controls="sw-row-aivideo"><span class="sw-more-label">View Sample Works</span><span class="sw-more-icon" aria-hidden="true">→</span></button></div>
         </div>
 
         <div class="sw-block adr" id="ad-results">
@@ -396,7 +399,7 @@
             <div class="sw-side"><span class="sw-count"><b>5</b> results · Meta, Google, Shopify</span></div>
           </div>
           <p class="sw-desc">Meta, Google Ads and Shopify results, copied straight from the account screenshots. Open any card’s screenshot to check the proof yourself.</p>
-          <ol class="adr-row reveal">
+          <ol class="adr-row reveal" id="adr-row">
           <li class="adr-card">
             <p class="adr-k"><b>01</b>Meta</p>
             <h3>Lead ads</h3>
@@ -453,6 +456,7 @@
             </button>
           </li>
         </ol>
+          <div class="sw-more"><button class="btn sw-more-btn" type="button" aria-expanded="false" aria-controls="adr-row"><span class="sw-more-label">View Sample Works</span><span class="sw-more-icon" aria-hidden="true">→</span></button></div>
           <dialog class="adr-dlg" id="adrDialog" aria-labelledby="adrDialogTitle">
         <div class="adr-dlg-top"><p id="adrDialogTitle">Ad results</p><button class="adr-dlg-x" type="button" aria-label="Close">×</button></div>
         <div class="adr-dlg-body">
@@ -520,28 +524,31 @@
         <div class="sw-block reveal" id="sw-websites">
           <div class="sw-top">
             <h3 class="serif"><span class="sw-n">06</span>Website <span class="italic">design</span></h3>
-            <div class="sw-side"><span class="sw-count"><b data-sw-count="websites">14</b> websites</span><button class="sw-arrow sw-prev" type="button" aria-label="Scroll back">←</button><button class="sw-arrow sw-next" type="button" aria-label="Scroll forward">→</button></div>
+            <div class="sw-side"><span class="sw-count"><b data-sw-count="websites">14</b> websites</span></div>
           </div>
           <p class="sw-desc">Website designs and builds. Hover a card to scroll the full page, click to open the live site.</p>
-          <div class="sw-row" data-sw-row="websites"></div>
+          <div class="sw-row" id="sw-row-websites" data-sw-row="websites"></div>
+          <div class="sw-more"><button class="btn sw-more-btn" type="button" aria-expanded="false" aria-controls="sw-row-websites"><span class="sw-more-label">View Sample Works</span><span class="sw-more-icon" aria-hidden="true">→</span></button></div>
         </div>
 
         <div class="sw-block reveal" id="sw-funnels">
           <div class="sw-top">
             <h3 class="serif"><span class="sw-n">07</span>Lead <span class="italic">funnels</span></h3>
-            <div class="sw-side"><span class="sw-count"><b data-sw-count="funnels">8</b> funnels</span><button class="sw-arrow sw-prev" type="button" aria-label="Scroll back">←</button><button class="sw-arrow sw-next" type="button" aria-label="Scroll forward">→</button></div>
+            <div class="sw-side"><span class="sw-count"><b data-sw-count="funnels">8</b> funnels</span></div>
           </div>
           <p class="sw-desc">Lead-generation and sales funnels. Hover a card to scroll the page, click to open the live funnel.</p>
-          <div class="sw-row" data-sw-row="funnels"></div>
+          <div class="sw-row" id="sw-row-funnels" data-sw-row="funnels"></div>
+          <div class="sw-more"><button class="btn sw-more-btn" type="button" aria-expanded="false" aria-controls="sw-row-funnels"><span class="sw-more-label">View Sample Works</span><span class="sw-more-icon" aria-hidden="true">→</span></button></div>
         </div>
 
         <div class="sw-block reveal" id="sw-automation">
           <div class="sw-top">
             <h3 class="serif"><span class="sw-n">08</span>CRM and <span class="italic">automation</span></h3>
-            <div class="sw-side"><span class="sw-count"><b data-sw-count="automation">10</b> workflows</span><button class="sw-arrow sw-prev" type="button" aria-label="Scroll back">←</button><button class="sw-arrow sw-next" type="button" aria-label="Scroll forward">→</button></div>
+            <div class="sw-side"><span class="sw-count"><b data-sw-count="automation">10</b> workflows</span></div>
           </div>
           <p class="sw-desc">GoHighLevel pipelines and follow-up workflows. Click any workflow to zoom in.</p>
-          <div class="sw-row" data-sw-row="automation"></div>
+          <div class="sw-row" id="sw-row-automation" data-sw-row="automation"></div>
+          <div class="sw-more"><button class="btn sw-more-btn" type="button" aria-expanded="false" aria-controls="sw-row-automation"><span class="sw-more-label">View Sample Works</span><span class="sw-more-icon" aria-hidden="true">→</span></button></div>
         </div>
 
         <div class="sw-source" hidden>
@@ -811,7 +818,7 @@
 
   <script src="assets/js/ai-video.js?v=20261112b"></script>
   <script src="assets/js/main.js?v=20261112b"></script>
-  <script src="assets/js/sample-works.js?v=20261112d"></script>
+  <script src="assets/js/sample-works.js?v=20261112f"></script>
   <script src="assets/js/protect.js?v=20261003a" defer></script>
   <script src="assets/js/builds.js?v=20261112a" defer></script>
   <script src="assets/js/ads.js?v=20261112b" defer></script>

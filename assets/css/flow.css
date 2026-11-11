@@ -23,9 +23,6 @@
 .sw-side { display: flex; flex: 0 0 auto; align-items: center; gap: 8px; }
 .sw-count { padding: 8px 13px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); font-size: 11px; letter-spacing: .06em; white-space: nowrap; }
 .sw-count b { color: var(--text); font-weight: 700; }
-.sw-arrow { width: 40px; height: 40px; border: 1px solid var(--line); border-radius: 50%; background: transparent; color: var(--text); font-size: 16px; cursor: pointer; transition: .2s; }
-.sw-arrow:hover:not(:disabled) { border-color: var(--accent); background: var(--accent); }
-.sw-arrow:disabled { opacity: .3; cursor: default; }
 .sw-desc { max-width: 640px; margin: 14px 0 26px; color: var(--muted); font-size: 15px; line-height: 1.7; }
 
 .sw-row {
@@ -51,6 +48,17 @@
 .sw-row, .adr-row { scrollbar-width: none; -ms-overflow-style: none; padding-bottom: 6px; }
 .sw-row::-webkit-scrollbar, .adr-row::-webkit-scrollbar { display: none; }
 
+/* "View Sample Works": opens the row into a grid of every sample in it */
+.sw-more { display: flex; justify-content: center; margin-top: 24px; }
+.sw-more[hidden] { display: none; }
+.sw-more-icon { font-size: 14px; line-height: 1; }
+.sw-row[data-sw-row="reels"], .sw-row[data-sw-row="aivideo"] { --sw-min: 170px; }
+.sw-row[data-sw-row="websites"], .sw-row[data-sw-row="funnels"], .sw-row[data-sw-row="automation"] { --sw-min: 280px; }
+.sw-row.is-all { display: grid; grid-template-columns: repeat(auto-fill, minmax(var(--sw-min, 230px), 1fr)); gap: 26px 16px; overflow: visible; }
+.sw-row.is-all > .project-card { flex: none; }
+.adr-row.is-all { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); overflow: visible; }
+.adr-row.is-all > .adr-card { flex: none; }
+
 /* ---------- New headings ---------- */
 .tools-marquee-heading .section-title { margin: 20px 0 0; }
 .cta-eyebrow { margin-bottom: 20px; }
@@ -64,6 +72,7 @@
   .sw-jump { margin-top: -14px; }
   .sw-block { margin-top: 44px; padding-top: 40px; }
   .sw-top { flex-direction: column; align-items: flex-start; gap: 12px; }
-  .sw-arrow { display: none; }
+  .sw-row.is-all { --sw-min: 150px; gap: 18px 12px; }
+  .sw-row.is-all[data-sw-row="websites"], .sw-row.is-all[data-sw-row="funnels"], .sw-row.is-all[data-sw-row="automation"] { --sw-min: 260px; }
   .sw-desc { font-size: 14px; }
 }
