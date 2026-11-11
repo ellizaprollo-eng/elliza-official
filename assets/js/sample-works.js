@@ -39,6 +39,7 @@
       const room = row.scrollWidth - row.clientWidth;
       auto = !reduce && !expanded && !!first && room >= first.offsetWidth + gap() + 2;
       row.classList.toggle('is-auto', auto);
+      row.classList.toggle('is-fade', !expanded && room > 2); // soft edges while cards run past the sides
       if (more) more.parentElement.hidden = !expanded && room <= 2; // nothing hidden off to the side: no button needed
       pos = row.scrollLeft;
       written = pos;
