@@ -1,0 +1,94 @@
+/* 05 / Blog posts (2026-11-12, like glaiza.digital): the homepage cards and the article pages in /blog.
+   Same palette, fonts and card language as styles.css. */
+
+/* ---------- Homepage cards ---------- */
+.blog-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.blog-card { min-width: 0; }
+.blog-link {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: linear-gradient(160deg, rgba(246,239,231,.05), rgba(246,239,231,.01));
+  transition: transform .45s cubic-bezier(.16,1,.3,1), border-color .35s ease;
+}
+.blog-link:hover { transform: translateY(-6px); border-color: rgba(200,120,88,.5); }
+.blog-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+.blog-media, .post-media { position: relative; display: block; aspect-ratio: 16 / 10; overflow: hidden; background: #f6efe7; }
+.blog-media img, .post-media img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+.blog-media.is-top img, .post-media.is-top img { object-position: top; }
+.blog-media.is-pair, .post-media.is-pair {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 22px;
+  background: radial-gradient(circle at 30% 15%, rgba(200,120,88,.38), transparent 60%), #2a1f1a;
+}
+.blog-media.is-pair img, .post-media.is-pair img { width: auto; max-width: 46%; height: 100%; border-radius: 10px; box-shadow: 0 16px 30px -12px rgba(0,0,0,.7); }
+.blog-link:hover .blog-media:not(.is-pair) img { transform: scale(1.04); }
+
+.blog-copy { display: flex; flex: 1; flex-direction: column; padding: 24px 24px 20px; }
+.blog-tag { align-self: flex-start; padding: 6px 12px; border-radius: 999px; background: rgba(200,120,88,.14); color: var(--accent-soft); font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.blog-title { margin: 18px 0 10px; font-size: clamp(22px, 1.9vw, 27px); line-height: 1.15; letter-spacing: -.025em; }
+.blog-excerpt { margin-bottom: 22px; color: var(--muted); font-size: 14px; line-height: 1.65; }
+.blog-meta { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 11px; letter-spacing: .06em; }
+.blog-go { color: var(--accent); font-size: 16px; transition: transform .25s ease; }
+.blog-link:hover .blog-go { transform: translateX(4px); }
+
+@media (max-width: 980px) { .blog-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .blog-grid { grid-template-columns: 1fr; } .blog-copy { padding: 20px; } }
+
+/* ---------- Article pages ---------- */
+.post-page { cursor: auto; } /* the custom cursor needs main.js, which the articles do not load */
+.post-page a, .post-page button { cursor: pointer; }
+.post-nav { position: sticky; top: 0; z-index: 50; border-bottom: 1px solid var(--line); background: rgba(7,7,7,.86); backdrop-filter: blur(10px); }
+.post-nav-in { display: flex; align-items: center; gap: 24px; height: 72px; }
+.post-back { margin-right: auto; color: var(--muted); font-size: 13px; }
+.post-back:hover { color: var(--text); }
+.post-nav-cta { padding: 11px 16px; font-size: 11px; }
+
+.post-wrap { max-width: 760px; padding: 72px 0 90px; }
+.post-wrap h1 { margin: 18px 0 16px; font-size: clamp(38px, 5.4vw, 62px); line-height: 1.02; letter-spacing: -.04em; }
+.post-meta { margin: 0; color: var(--muted); font-size: 13px; letter-spacing: .04em; }
+.post-hero { margin: 34px 0 40px; }
+.post-media { aspect-ratio: 16 / 9; border: 1px solid var(--line); border-radius: 20px; }
+
+.post-body { color: rgba(247,244,238,.88); font-size: 17px; line-height: 1.8; }
+.post-body h2 { margin: 44px 0 12px; color: var(--text); font-family: "Playfair Display", serif; font-size: clamp(26px, 3vw, 34px); font-weight: 500; line-height: 1.15; letter-spacing: -.025em; }
+.post-body p { margin: 0 0 18px; }
+.post-body ul { margin: 0 0 22px; padding: 0; list-style: none; }
+.post-body li { position: relative; margin-bottom: 10px; padding-left: 26px; }
+.post-body li::before { content: ""; position: absolute; left: 3px; top: .62em; width: 9px; height: 5px; border-left: 2px solid var(--accent); border-bottom: 2px solid var(--accent); transform: rotate(-45deg); }
+.post-body a, .post-samples a { color: var(--accent-soft); text-decoration: underline; text-underline-offset: 3px; }
+.post-body blockquote { margin: 0 0 22px; padding: 16px 20px; border-left: 3px solid var(--accent); border-radius: 0 12px 12px 0; background: rgba(246,239,231,.05); font-style: italic; }
+.post-samples { margin: 34px 0 0; font-weight: 700; }
+
+.post-cta { margin-top: 56px; padding: 34px; border: 1px solid rgba(200,120,88,.45); border-radius: 24px; background: radial-gradient(circle at 90% 0%, rgba(200,120,88,.2), transparent 50%), rgba(246,239,231,.03); }
+.post-cta h2 { margin: 0 0 10px; font-size: clamp(28px, 3.4vw, 40px); line-height: 1.05; }
+.post-cta p { margin: 0 0 22px; color: var(--muted); }
+.post-cta-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+.post-more { display: grid; gap: 12px; margin-top: 56px; }
+.post-more .eyebrow { margin-bottom: 4px; }
+.post-more a { display: flex; flex-direction: column; gap: 6px; padding: 18px 20px; border: 1px solid var(--line); border-radius: 16px; transition: border-color .25s ease; }
+.post-more a:hover { border-color: rgba(200,120,88,.5); }
+.post-more-tag { color: var(--accent-soft); font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.post-more-title { font-size: 20px; line-height: 1.25; letter-spacing: -.02em; }
+
+.post-foot { padding: 30px 0 110px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+.post-foot a { color: var(--text); }
+
+@media (max-width: 640px) {
+  .post-nav-cta { display: none; }
+  .post-wrap { padding-top: 44px; }
+  .post-body { font-size: 16px; }
+  .post-cta { padding: 24px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .blog-link:hover { transform: none; }
+  .blog-link:hover .blog-media img, .blog-link:hover .blog-go { transform: none; }
+}
