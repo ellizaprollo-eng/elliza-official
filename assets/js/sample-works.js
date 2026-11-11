@@ -13,8 +13,8 @@
   const HOLD = 2500; // ms of stillness after a swipe or an arrow click
 
   rows.forEach((row) => {
-    const cat = row.dataset.swRow;
-    const cards = [...grid.querySelectorAll(`.project-card[data-category="${cat}"]`)];
+    const cat = row.dataset.swRow; // one or more categories, e.g. "websites funnels"
+    const cards = cat.split(' ').flatMap((c) => [...grid.querySelectorAll(`.project-card[data-category="${c}"]`)]);
     cards.forEach((card) => {
       card.classList.remove('is-hidden', 'is-load-more-hidden');
       card.classList.add('visible');

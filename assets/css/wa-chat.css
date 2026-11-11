@@ -1,0 +1,107 @@
+/* WhatsApp chat (2026-11-12, glaiza.digital style): a floating button that opens a small chat card;
+   "Send a message" opens WhatsApp to Elliza's phone. Espresso header in her palette, WhatsApp green for the actions. */
+.wa-chat { --wa-green: #25d366; --wa-deep: #128c4a; }
+.wa-fab {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 1600;
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: var(--wa-green);
+  color: #fff;
+  box-shadow: 0 14px 34px -10px rgba(37,211,102,.55), 0 6px 18px rgba(0,0,0,.35);
+  cursor: pointer;
+  transition: transform .25s ease, background .25s ease;
+}
+.wa-fab:hover { transform: translateY(-2px) scale(1.04); background: #20bd5a; }
+.wa-fab:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+.wa-fab .whatsapp-icon { width: 28px; height: 28px; fill: currentColor; }
+.wa-x { display: none; font-size: 30px; line-height: 1; }
+.wa-fab.is-open .whatsapp-icon { display: none; }
+.wa-fab.is-open .wa-x { display: block; }
+.wa-dot { position: absolute; top: 3px; right: 3px; width: 13px; height: 13px; border: 2px solid #0b0908; border-radius: 50%; background: #ff4d4f; }
+
+/* the back-to-top button moves up so the two never overlap */
+.back-to-top { bottom: 92px; }
+
+.wa-panel {
+  position: fixed;
+  right: 22px;
+  bottom: 92px;
+  z-index: 1600;
+  width: min(370px, calc(100vw - 32px));
+  overflow: hidden;
+  border-radius: 22px;
+  background: #fff;
+  color: #1f1f1f;
+  box-shadow: 0 30px 70px -20px rgba(0,0,0,.65), 0 0 0 1px rgba(246,239,231,.08);
+  transform-origin: bottom right;
+  animation: waIn .28s cubic-bezier(.16,1,.3,1);
+}
+.wa-panel[hidden] { display: none; }
+@keyframes waIn { from { opacity: 0; transform: translateY(10px) scale(.97); } to { opacity: 1; transform: none; } }
+
+.wa-head { display: flex; align-items: center; gap: 14px; padding: 16px 16px 16px 18px; background: #15110f; color: #f6efe7; }
+.wa-avatar { position: relative; flex: 0 0 auto; width: 50px; height: 50px; }
+.wa-avatar img { width: 100%; height: 100%; border: 2px solid rgba(246,239,231,.85); border-radius: 50%; object-fit: cover; }
+.wa-avatar i { position: absolute; right: 1px; bottom: 1px; width: 12px; height: 12px; border: 2px solid #15110f; border-radius: 50%; background: var(--wa-green); }
+.wa-head > div { flex: 1 1 auto; min-width: 0; }
+.wa-name { margin: 0; font-family: "Playfair Display", serif; font-size: 19px; font-weight: 500; line-height: 1.2; }
+.wa-status { margin: 3px 0 0; color: rgba(246,239,231,.7); font-size: 12.5px; }
+.wa-close { flex: 0 0 auto; width: 34px; height: 34px; border: 0; border-radius: 50%; background: transparent; color: #f6efe7; font-size: 24px; line-height: 1; cursor: pointer; }
+.wa-close:hover, .wa-close:focus-visible { background: rgba(246,239,231,.12); }
+
+.wa-body { padding: 18px 16px 20px; background-color: #efeae2; background-image: radial-gradient(rgba(0,0,0,.05) 1px, transparent 1px); background-size: 14px 14px; }
+.wa-bubble { position: relative; max-width: 92%; padding: 12px 14px 8px; border-radius: 4px 16px 16px 16px; background: #fff; box-shadow: 0 1px 1px rgba(0,0,0,.08); }
+.wa-bubble b { display: block; margin-bottom: 4px; color: #a85a3d; font-size: 13px; }
+.wa-bubble p { margin: 0; font-size: 14px; line-height: 1.5; }
+.wa-bubble time { display: block; margin-top: 4px; color: #8a8a8a; font-size: 11px; text-align: right; }
+
+.wa-form { display: grid; gap: 12px; padding: 16px; background: #fff; }
+.wa-form textarea {
+  width: 100%;
+  min-height: 78px;
+  resize: vertical;
+  padding: 11px 13px;
+  border: 1px solid #ddd;
+  border-radius: 14px;
+  background: #f7f7f7;
+  color: #1f1f1f;
+  font: 14px/1.45 "DM Sans", sans-serif;
+}
+.wa-form textarea:focus { outline: 2px solid var(--wa-green); outline-offset: 0; border-color: transparent; background: #fff; }
+.wa-send {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 50px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--wa-green);
+  color: #fff;
+  font: 700 16px "DM Sans", sans-serif;
+  cursor: pointer;
+  transition: background .2s ease;
+}
+.wa-send:hover, .wa-send:focus-visible { background: var(--wa-deep); }
+.wa-send .whatsapp-icon { width: 20px; height: 20px; fill: currentColor; }
+.wa-note { margin: -2px 0 0; color: #777; font-size: 12px; text-align: center; }
+
+@media (pointer: coarse), (max-width: 768px) {
+  .wa-chat, .wa-chat button { cursor: auto; }
+}
+@media (max-width: 480px) {
+  .wa-fab { right: 16px; bottom: 16px; }
+  .back-to-top { right: 22px; bottom: 84px; }
+  .wa-panel { right: 16px; left: 16px; width: auto; bottom: 84px; max-height: calc(100vh - 110px); overflow-y: auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wa-panel { animation: none; }
+  .wa-fab:hover { transform: none; }
+}
