@@ -1,0 +1,31 @@
+/* Booking page /book (2026-11-12, like glaiza.digital/book.html): headline, her Calendly inline, and how the audit works.
+   Header, footer and cursor reset come from blog.css (.post-page). */
+.book { padding: 64px 0 40px; }
+.book-head { max-width: 860px; text-align: center; }
+.book-head .eyebrow { justify-content: center; }
+.book-head h1 { margin: 18px 0 18px; font-size: clamp(38px, 5.6vw, 66px); line-height: 1.02; letter-spacing: -.04em; }
+.book-head h1 .italic { color: var(--accent-soft); }
+.book-intro { max-width: 660px; margin: 0 auto; color: rgba(246,239,231,.82); font-size: 16px; line-height: 1.75; }
+.book-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 18px; margin: 22px 0 0; padding: 0; list-style: none; }
+.book-chips li { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.book-chips li::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+
+.book-cal { max-width: 1000px; margin-top: 44px; }
+.book-frame { overflow: hidden; border: 1px solid rgba(246,239,231,.14); border-radius: 22px; background: #fff; box-shadow: 0 50px 110px -50px rgba(200,120,88,.5), 0 30px 60px -30px rgba(0,0,0,.8); }
+.calendly-inline-widget { min-width: 320px; height: 700px; }
+.book-fallback { margin: 14px 0 0; color: var(--muted); font-size: 13px; text-align: center; }
+.book-fallback a { color: var(--accent-soft); text-decoration: underline; text-underline-offset: 3px; }
+
+.book-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; max-width: 1000px; margin-top: 34px; }
+.book-card { padding: 24px; border: 1px solid var(--line); border-radius: 18px; background: linear-gradient(160deg, rgba(246,239,231,.05), rgba(246,239,231,.012)); }
+.book-card-k { margin: 0 0 10px; color: var(--accent-soft); font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.book-card h2 { margin: 0 0 8px; font-size: 22px; line-height: 1.15; letter-spacing: -.02em; }
+.book-card p:last-child { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.65; }
+
+@media (max-width: 860px) { .book-cards { grid-template-columns: 1fr; } }
+@media (max-width: 640px) {
+  .book { padding-top: 40px; }
+  .book-intro { font-size: 15px; }
+  .calendly-inline-widget { height: 1000px; }
+  .book-frame { border-radius: 16px; }
+}
