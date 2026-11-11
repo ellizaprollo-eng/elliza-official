@@ -4,3 +4,8 @@ input, textarea, select, [contenteditable="true"] { -webkit-user-select: text; u
 img, video { -webkit-user-drag: none; -webkit-touch-callout: none; }
 html.wp-shield img, html.wp-shield video, html.wp-shield iframe, html.wp-shield canvas, html.wp-shield picture { filter: blur(24px) !important; transition: filter .12s ease; }
 @media print { html, body { display: none !important; } }
+/* 2026-11-12 owner bug report: platform and client logos "vanished" (blurred) whenever the window lost focus.
+   Logos and the chat photo are not samples, so they stay sharp; the samples are still shielded. */
+html.wp-shield .tool-icon img, html.wp-shield .wa-avatar img { filter: none !important; }
+html.wp-shield .client-logo img { filter: grayscale(1) contrast(1.05) !important; } /* their normal desktop look */
+@media (hover: none) { html.wp-shield .client-logo img { filter: none !important; } }

@@ -26,10 +26,31 @@
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && !panel.hidden) { setOpen(false); fab.focus(); }
   });
+  // Owner: no new tab. Phones open the WhatsApp app itself (falling back to the WhatsApp page in this tab when the
+  // app is not installed); computers go straight into WhatsApp Web in this tab. WhatsApp never lets a website press
+  // send for the visitor, so the chat opens with the message already typed. Not wa.me: some PH networks block it.
+  const isPhone = window.matchMedia('(pointer: coarse)').matches || /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const openChat = (msg) => {
+    const q = `phone=${PHONE}` + (msg ? `&text=${encodeURIComponent(msg)}` : '');
+    if (!isPhone) { window.location.href = `https://web.whatsapp.com/send?${q}`; return; }
+    let left = false;
+    const away = () => { left = true; };
+    window.addEventListener('pagehide', away, { once: true });
+    window.addEventListener('blur', away, { once: true });
+    document.addEventListener('visibilitychange', away, { once: true });
+    window.location.href = `whatsapp://send?${q}`;
+    setTimeout(() => { if (!left) window.location.href = `https://api.whatsapp.com/send?${q}`; }, 1500);
+  };
+
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    const msg = text.value.trim() || text.defaultValue;
-    // api.whatsapp.com rather than wa.me: some networks in the Philippines block wa.me
-    window.open(`https://api.whatsapp.com/send?phone=${PHONE}&text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
+    openChat(text.value.trim() || text.defaultValue);
+  });
+  // Every other "Chat on WhatsApp" link on the page opens the same way.
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest && e.target.closest('a[href*="api.whatsapp.com/send"]');
+    if (!a || e.ctrlKey || e.metaKey || e.shiftKey || e.button !== 0) return;
+    e.preventDefault();
+    openChat(new URL(a.href).searchParams.get('text') || '');
   });
 })();
