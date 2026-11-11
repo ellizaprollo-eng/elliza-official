@@ -221,12 +221,20 @@ Object.entries(projectCatalog).forEach(([category, info]) => {
   }
 });
 
+// AI Video tab (2026-11-12): entries come from ai-video.js, the files are hosted on elliza-ai-video.vercel.app.
+(window.AI_VIDEOS || []).forEach(v => projectItems.push({
+  category: 'aivideo', title: v.title, subtitle: v.label, image: v.poster, fullImage: v.poster,
+  video: v.video || '', embed: v.embed || '', loop: v.loop, ratio: v.ratio, length: v.length
+}));
+
 projectsGrid.innerHTML = projectItems.map(item => `
-  <article class="project-card reveal${item.category !== 'graphics' ? ' is-hidden' : ''}" data-category="${item.category}" data-video="${item.video}" data-image="${item.image}" data-full-image="${item.fullImage || item.image}" data-live-url="${item.liveUrl || ''}" ${item.category !== 'graphics' ? 'style="display:none"' : ''}>
+  <article class="project-card reveal${item.category !== 'graphics' ? ' is-hidden' : ''}" data-category="${item.category}" data-video="${item.video}" data-image="${item.image}" data-full-image="${item.fullImage || item.image}" data-live-url="${item.liveUrl || ''}"${item.category === 'aivideo' ? ` data-loop="${item.loop}" data-ratio="${item.ratio}"` : ''} ${item.category !== 'graphics' ? 'style="display:none"' : ''}>
     <a href="${item.liveUrl || '#'}" ${(item.category === 'websites' || item.category === 'funnels') ? 'target="_blank" rel="noopener noreferrer"' : ''} aria-label="${(item.category === 'websites' || item.category === 'funnels') ? `Visit ${item.title}` : `Open ${item.title} project preview`}">
       <div class="project-image">
         ${item.category === 'reels'
           ? `<video muted playsinline preload="metadata" aria-label="Reel preview"><source src="${item.video}" type="video/mp4"></video><span class="reel-play-badge" aria-hidden="true">▶</span>`
+          : item.category === 'aivideo'
+          ? `<img src="${item.image}" alt="${item.title}, ${item.subtitle}" loading="lazy" decoding="async" draggable="false"><span class="reel-play-badge" aria-hidden="true">▶</span><span class="ai-card-meta"><b>${item.title}</b><small>${item.subtitle} · ${item.length}</small></span>`
           : `<img class="${item.category === 'websites' || item.category === 'funnels' ? 'website-scroll-image' : ''}" src="${item.image}" alt="${item.subtitle} ${item.title.slice(-2)} by Elliza Olvina" loading="lazy" decoding="async" draggable="false">`
         }
       </div>
@@ -244,7 +252,7 @@ const expandedCategories = new Set();
 
 function updateCategoryVisibility(category) {
   const categoryCards = [...projects].filter(card => card.dataset.category === category);
-  const supportsLoadMore = category === 'graphics' || category === 'reels';
+  const supportsLoadMore = category === 'graphics' || category === 'reels' || category === 'aivideo';
   const expanded = expandedCategories.has(category);
   categoryCards.forEach((card, index) => {
     card.classList.toggle('is-load-more-hidden', supportsLoadMore && !expanded && index >= INITIAL_VISIBLE_PROJECTS);
@@ -335,6 +343,7 @@ const modalPrev = document.getElementById('modalPrev');
 const modalNext = document.getElementById('modalNext');
 const modalImage = document.getElementById('modalImage');
 const modalVideo = document.getElementById('modalVideo');
+const modalEmbed = document.getElementById('modalEmbed'); // Google Drive player for AI Video entries without a file
 let lastFocused = null;
 let activeCategory = 'graphics';
 let activeCategoryIndex = 0;
@@ -422,6 +431,8 @@ function stopModalVideo() {
   modalVideo.pause();
   modalVideo.removeAttribute('src');
   modalVideo.load();
+  modalEmbed.hidden = true;
+  modalEmbed.removeAttribute('src');
 }
 
 function updateModalWebsitePreview() {
@@ -453,7 +464,8 @@ function showModalItem(index, direction = 0) {
   if (!items.length) return;
   activeCategoryIndex = (index + items.length) % items.length;
   const item = items[activeCategoryIndex];
-  const reel = item.category === 'reels';
+  const reel = item.category === 'reels' || item.category === 'aivideo';
+  modal.classList.toggle('is-wide', item.ratio === '16:9');
 
   const media = modal.querySelector('.modal-image');
   media.classList.remove('slide-left', 'slide-right');
@@ -474,6 +486,7 @@ function showModalItem(index, direction = 0) {
     modalImage.style.display = 'none';
     modalVideo.style.display = 'block';
     stopModalVideo();
+    if (item.embed) { modalVideo.style.display = 'none'; modalEmbed.hidden = false; modalEmbed.src = item.embed; return; }
     modalVideo.src = item.video;
     modalVideo.load();
     // The popup video plays only after the user has clicked/opened it.
@@ -533,7 +546,7 @@ modalNext.addEventListener('click', event => {
 });
 
 function closeModal() {
-  modal.classList.remove('open', 'is-reel', 'is-automation', 'is-website-preview', 'is-popup-scrolling');
+  modal.classList.remove('open', 'is-reel', 'is-automation', 'is-website-preview', 'is-popup-scrolling', 'is-wide');
   resetAutomationPan();
   stopModalVideo();
   document.body.style.overflow = '';

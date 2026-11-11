@@ -1,0 +1,114 @@
+/* Added 2026-11-12: the AI Video tab in Featured work (cards built by main.js from ai-video.js)
+   and the Paid ads results section (#ad-results). Same palette, fonts and card language as styles.css. */
+
+/* ---------- AI Video cards ---------- */
+.project-card[data-category="aivideo"] .project-image { aspect-ratio: 9 / 16; }
+.ai-loop { position: absolute; inset: 0; z-index: 1; opacity: 0; transition: opacity .3s ease; }
+.project-card.is-looping .ai-loop { opacity: 1; }
+.project-card[data-category="aivideo"] .reel-play-badge, .ai-card-meta { z-index: 2; }
+.project-card.is-looping .reel-play-badge { opacity: 0; }
+.ai-card-meta {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 56px 14px 14px;
+  background: linear-gradient(transparent, rgba(8,6,5,.9));
+  pointer-events: none;
+}
+.ai-card-meta b {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-family: "Playfair Display", serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.18;
+  letter-spacing: -.01em;
+  color: var(--text);
+}
+.ai-card-meta small { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent-soft); }
+
+/* Popup: Google Drive player and wide (16:9) videos */
+#modalEmbed { width: 100%; height: 100%; border: 0; background: #050505; }
+.project-modal.is-reel.is-wide .modal-panel { width: min(1080px, 100%); }
+.project-modal.is-reel.is-wide .modal-image { height: auto; max-height: 80vh; aspect-ratio: 16 / 9; }
+
+/* ---------- Paid ads results ---------- */
+.adr-row { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; margin: 0; padding: 0; list-style: none; }
+.adr-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 24px 20px 20px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: linear-gradient(160deg, rgba(246,239,231,.06), rgba(246,239,231,.012));
+  transition: transform .45s cubic-bezier(.16,1,.3,1), border-color .35s ease;
+}
+.adr-card:hover { transform: translateY(-6px); border-color: rgba(200,120,88,.5); }
+.adr-k { display: flex; justify-content: space-between; align-items: center; margin: 0; color: var(--muted); font-size: 10px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+.adr-k b { font-family: "Playfair Display", serif; font-style: italic; font-size: 24px; font-weight: 500; letter-spacing: -.04em; color: var(--accent); }
+.adr-card h3 { margin: 24px 0 10px; font-family: "Playfair Display", serif; font-size: 24px; font-weight: 500; line-height: 1.05; letter-spacing: -.03em; }
+.adr-hero { display: flex; flex-direction: column; gap: 5px; margin: 0 0 16px; }
+.adr-hero strong { font-family: "Playfair Display", serif; font-size: clamp(26px, 2.15vw, 34px); font-weight: 500; line-height: 1; letter-spacing: -.04em; color: var(--accent-soft); white-space: nowrap; }
+.adr-hero span { color: var(--muted); font-size: 12px; line-height: 1.4; }
+.adr-lines { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+.adr-lines li { padding: 9px 0; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 12.5px; line-height: 1.45; }
+.adr-lines b { color: var(--text); font-weight: 700; }
+.adr-sub { margin: 14px 0 16px; color: var(--muted-2); font-size: 11px; line-height: 1.5; }
+.adr-shot {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin-top: auto;
+  padding: 0;
+  aspect-ratio: 16 / 10;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  background: #f6efe7;
+  cursor: pointer;
+}
+.adr-shot img { width: 100%; height: 100%; object-fit: cover; object-position: left top; transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+.adr-shot:hover img { transform: scale(1.06); }
+.adr-shot span { position: absolute; left: 8px; bottom: 8px; padding: 6px 10px; border-radius: 999px; background: rgba(11,9,8,.84); color: var(--text); font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.adr-shot:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+.adr-dlg {
+  width: min(1100px, calc(100vw - 32px));
+  max-height: calc(100vh - 48px);
+  padding: 0;
+  border: 1px solid rgba(246,239,231,.16);
+  border-radius: 20px;
+  background: #15110f;
+  color: var(--text);
+  overflow: hidden;
+}
+.adr-dlg[open] { display: flex; flex-direction: column; }
+.adr-dlg::backdrop { background: rgba(5,4,3,.84); }
+.adr-dlg-top { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 12px 14px 12px 22px; border-bottom: 1px solid var(--line); }
+.adr-dlg-top p { margin: 0; font-family: "Playfair Display", serif; font-size: 20px; }
+.adr-dlg-x { flex: 0 0 auto; width: 40px; height: 40px; border: 1px solid var(--line); border-radius: 50%; background: transparent; color: var(--text); font-size: 22px; line-height: 1; cursor: pointer; }
+.adr-dlg-x:hover { border-color: var(--accent); background: var(--accent); }
+.adr-dlg-body { overflow: auto; overscroll-behavior: contain; padding: 22px; }
+.adr-proof figure { margin: 0 0 24px; }
+.adr-proof figure:last-child { margin-bottom: 0; }
+.adr-proof img { display: block; width: 100%; height: auto; border-radius: 10px; background: #fff; }
+.adr-proof figcaption { margin-top: 10px; color: var(--muted); font-size: 12px; }
+
+@media (max-width: 1180px) {
+  .adr-row { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 14px; }
+  .adr-card { flex: 0 0 280px; scroll-snap-align: start; }
+}
+@media (max-width: 620px) {
+  .adr-card { flex-basis: 82%; }
+  .adr-dlg-body { padding: 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .adr-card:hover, .adr-shot:hover img { transform: none; }
+}
