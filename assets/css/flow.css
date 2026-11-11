@@ -45,6 +45,8 @@
 .sw-row[data-sw-row="funnels"] > .project-card,
 .sw-row[data-sw-row="automation"] > .project-card { flex-basis: clamp(250px, 26vw, 360px); }
 .sw-row .project-image { height: auto; }
+/* auto-slide moves the row a fraction of a pixel per frame; snapping would fight it */
+.sw-row.is-auto, .adr-row.is-auto { scroll-snap-type: none; }
 
 /* ---------- New headings ---------- */
 .tools-marquee-heading .section-title { margin: 20px 0 0; }
