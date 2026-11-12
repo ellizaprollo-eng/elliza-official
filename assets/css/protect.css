@@ -9,3 +9,6 @@ html.wp-shield img, html.wp-shield video, html.wp-shield iframe, html.wp-shield 
 html.wp-shield .tool-icon img, html.wp-shield .wa-avatar img { filter: none !important; }
 html.wp-shield .client-logo img { filter: grayscale(1) contrast(1.05) !important; } /* their normal desktop look */
 @media (hover: none) { html.wp-shield .client-logo img { filter: none !important; } }
+/* 2026-11-12 owner screenshot: the verified client review turned into a grey smear (blurred) in screenshots.
+   It is a testimonial, not a sample, so it stays sharp like the logos. */
+html.wp-shield .review-shot img, html.wp-shield #reviewDialogImage { filter: none !important; }
