@@ -1,5 +1,5 @@
-/* Light mode (2026-11-12, owner: "Buhati og lightmode ang site"). Dark stays the default; the sun/moon button in the
-   nav switches to this ivory + espresso + terracotta version of the same brand palette and remembers the choice.
+/* Light mode (2026-11-12, owner: "Buhati og lightmode ang site", then "show light mode first, dark is the other choice").
+   Light is the DEFAULT: the <head> script sets data-theme="light" unless the visitor picked dark with the sun/moon button.
    Every rule is scoped to html[data-theme="light"], so the dark site is untouched. Things that sit on photos and
    videos (play badges, caption gradients, the media lightbox, the WhatsApp chat header) stay dark on purpose. */
 

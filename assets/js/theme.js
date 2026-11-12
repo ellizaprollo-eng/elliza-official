@@ -1,5 +1,5 @@
-/* Light mode switch (2026-11-12). Dark is the default; the choice is remembered in localStorage ("elliza-theme").
-   A tiny script in each page's <head> applies the saved choice before the page paints, so there is no dark flash. */
+/* Theme switch (2026-11-12). Light is the default (owner: show light first, dark is the option); a dark choice is remembered
+   in localStorage ("elliza-mode"). A tiny script in each page's <head> applies it before the page paints, so there is no flash. */
 (() => {
   const btn = document.getElementById('themeToggle');
   if (!btn) return;
@@ -15,7 +15,7 @@
   btn.addEventListener('click', () => {
     const light = root.getAttribute('data-theme') !== 'light';
     if (light) root.setAttribute('data-theme', 'light'); else root.removeAttribute('data-theme');
-    try { localStorage.setItem('elliza-theme', light ? 'light' : 'dark'); } catch (e) { /* private mode: still switches */ }
+    try { localStorage.setItem('elliza-mode', light ? 'light' : 'dark'); } catch (e) { /* private mode: still switches */ }
     sync();
   });
   sync();
