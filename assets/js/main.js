@@ -1019,3 +1019,30 @@ if (reviewDialog && reviewDialog.showModal) {
   }, { threshold: .15 });
   videos.forEach(video => videoObserver.observe(video));
 })();
+
+// Skills & tools rows (owner: the row gets "cut" on wide screens). The CSS loop slides each track by half its width,
+// so half the track must be at least as wide as the row, or the row runs out of chips. Add copies until it is,
+// and stretch the duration so the speed stays the same.
+(() => {
+  document.querySelectorAll('.tools-marquee-track').forEach(track => {
+    const group = track.querySelector('.tools-marquee-group');
+    const base = parseFloat(getComputedStyle(track).animationDuration) || 30; // seconds per group in the HTML (2 groups)
+    const fill = () => {
+      const w = group.getBoundingClientRect().width;
+      if (!w) return;
+      let n = track.children.length;
+      while ((n / 2) * w < track.parentElement.clientWidth) {
+        for (let i = 0; i < 2; i++) { // always an even count, so the -50% loop stays seamless
+          const copy = group.cloneNode(true);
+          copy.setAttribute('aria-hidden', 'true');
+          track.appendChild(copy);
+        }
+        n += 2;
+      }
+      track.style.animationDuration = `${base * n / 2}s`;
+    };
+    fill();
+    document.fonts?.ready.then(fill);
+    window.addEventListener('resize', fill);
+  });
+})();
