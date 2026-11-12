@@ -221,6 +221,12 @@ Object.entries(projectCatalog).forEach(([category, info]) => {
   }
 });
 
+// Email design & campaigns (2026-11-13): entries come from emails.js; thumbs on the cards, the full email in the popup.
+(window.EMAIL_SAMPLES || []).forEach(e => projectItems.push({
+  category: 'email', title: e.title, subtitle: 'Email design', image: `assets/images/emails/thumbs/${e.id}.webp`,
+  fullImage: `assets/images/emails/${e.id}.webp`, video: '', liveUrl: ''
+}));
+
 // AI Video tab (2026-11-12): entries come from ai-video.js, the files are hosted on elliza-ai-video.vercel.app.
 (window.AI_VIDEOS || []).forEach(v => projectItems.push({
   category: 'aivideo', title: v.title, subtitle: v.label, image: v.poster, fullImage: v.poster,
@@ -235,6 +241,8 @@ projectsGrid.innerHTML = projectItems.map(item => `
           ? `<video muted playsinline preload="metadata" aria-label="Reel preview"><source src="${item.video}" type="video/mp4"></video><span class="reel-play-badge" aria-hidden="true">▶</span>`
           : item.category === 'aivideo'
           ? `<img src="${item.image}" alt="${item.title}, ${item.subtitle}" loading="lazy" decoding="async" draggable="false"><span class="reel-play-badge" aria-hidden="true">▶</span><span class="ai-card-meta"><b>${item.title}</b><small>${item.subtitle} · ${item.length}</small></span>`
+          : item.category === 'email'
+          ? `<img src="${item.image}" alt="Email design: ${item.title}" loading="lazy" decoding="async" draggable="false">`
           : `<img class="${item.category === 'websites' || item.category === 'funnels' ? 'website-scroll-image' : ''}" src="${item.image}" alt="${item.subtitle} ${item.title.slice(-2)} by Elliza Olvina" loading="lazy" decoding="async" draggable="false">`
         }
       </div>
@@ -480,6 +488,8 @@ function showModalItem(index, direction = 0) {
   modal.classList.toggle('is-automation', automationPreview);
   if (automationPreview) { setAutomationZoom(0); resetAutomationPan(); }
   modal.classList.toggle('is-website-preview', websitePreview);
+  modal.classList.toggle('is-email', item.category === 'email');
+  media.scrollTop = 0; // emails are read by scrolling: every email starts at its top
   modal.classList.remove('is-popup-scrolling');
 
   if (reel) {
@@ -496,7 +506,7 @@ function showModalItem(index, direction = 0) {
     modalVideo.style.display = 'none';
     modalImage.style.display = 'block';
     modalImage.src = item.fullImage || item.image;
-    modalImage.alt = `${item.subtitle} by Elliza Olvina`;
+    modalImage.alt = item.category === 'email' ? `Email design: ${item.title}` : `${item.subtitle} by Elliza Olvina`;
     if (websitePreview) {
       if (modalImage.complete) requestAnimationFrame(updateModalWebsitePreview);
     } else {

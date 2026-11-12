@@ -101,3 +101,20 @@
     mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%);
   }
 }
+
+/* 04 Email design & campaigns (2026-11-13): tall cards showing the top of each email; the popup is a scrollable
+   column with the whole email at reading size. */
+.sw-row[data-sw-row~="email"] > .project-card { flex-basis: clamp(180px, 17vw, 240px); }
+.project-card[data-category="email"] .project-image { aspect-ratio: 4 / 5; background: #fff; }
+.project-card[data-category="email"] .project-image img { object-position: top center; }
+.project-modal.is-email .modal-panel { width: min(680px, 94vw); max-height: none; overflow: visible; }
+.project-modal.is-email .modal-image {
+  height: min(86vh, 1100px);
+  aspect-ratio: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border-radius: 24px;
+  background: #fff;
+}
+.project-modal.is-email .modal-image img { display: block; height: auto; object-fit: initial; background: #fff; }
