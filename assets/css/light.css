@@ -137,6 +137,8 @@ html[data-theme="light"] .ask-card li { color: rgba(28,21,17,.86); }
 html[data-theme="light"] .ask-card { background: var(--card); box-shadow: 0 22px 50px -38px rgba(43,30,22,.45); }
 html[data-theme="light"] .adr-dlg { background: #fffaf4; border-color: var(--line); color: var(--text); }
 html[data-theme="light"] .cal-text { color: rgba(28,21,17,.84); }
+/* "See N screenshots" pill sits on the photo and stays dark, so its text stays light (was var(--text) = dark on dark) */
+html[data-theme="light"] .adr-shot span { color: #f6efe7; }
 html[data-theme="light"] .cal-shot { border-color: var(--line); }
 
 /* Blog and booking pages */
