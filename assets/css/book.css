@@ -12,7 +12,7 @@
 
 .book-cal { max-width: 1000px; margin-top: 44px; }
 .book-frame { overflow: hidden; border: 1px solid rgba(246,239,231,.14); border-radius: 22px; background: #fff; box-shadow: 0 50px 110px -50px rgba(200,120,88,.5), 0 30px 60px -30px rgba(0,0,0,.8); }
-.calendly-inline-widget { min-width: 320px; height: 700px; }
+.calendly-inline-widget { min-width: 320px; height: 880px; transition: height .25s ease; } /* book.js sets the exact height Calendly reports */
 .book-fallback { margin: 14px 0 0; color: var(--muted); font-size: 13px; text-align: center; }
 .book-fallback a { color: var(--accent-soft); text-decoration: underline; text-underline-offset: 3px; }
 
@@ -26,7 +26,6 @@
 @media (max-width: 640px) {
   .book { padding-top: 40px; }
   .book-intro { font-size: 15px; }
-  .calendly-inline-widget { height: 1000px; }
   .book-frame { border-radius: 16px; }
 }
 
