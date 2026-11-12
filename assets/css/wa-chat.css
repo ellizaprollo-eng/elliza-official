@@ -102,26 +102,3 @@
   .wa-panel { animation: none; }
   .wa-fab:hover { transform: none; }
 }
-
-/* Name + WhatsApp number (2026-11-12): needed so the message can go straight to Elliza and she can reply */
-.wa-form input:not(.wa-hp) {
-  width: 100%;
-  height: 44px;
-  padding: 0 13px;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  background: #f7f7f7;
-  color: #1f1f1f;
-  font: 14px "DM Sans", sans-serif;
-}
-.wa-form input:not(.wa-hp):focus { outline: 2px solid var(--wa-green); outline-offset: 0; border-color: transparent; background: #fff; }
-.wa-form textarea { min-height: 70px; }
-.wa-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
-.wa-send:disabled { opacity: .7; cursor: wait; }
-.wa-note.is-error { color: #c0392b; font-weight: 600; }
-.wa-done { padding: 22px 18px 24px; background: #fff; text-align: center; }
-.wa-done[hidden] { display: none; }
-.wa-done b { display: block; margin-bottom: 6px; color: var(--wa-deep); font-size: 20px; }
-.wa-done p { margin: 0; color: #555; font-size: 14px; line-height: 1.55; }
-.wa-panel { max-height: calc(100vh - 110px); overflow-y: auto; }
-.wa-form[hidden] { display: none; } /* .wa-form sets display: grid, which would otherwise keep it visible after "Sent" */

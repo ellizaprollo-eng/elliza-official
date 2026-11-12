@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Italiana&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/css/styles.css?v=20261001c">
-  <link rel="stylesheet" href="/assets/css/wa-chat.css?v=20261112s">
+  <link rel="stylesheet" href="/assets/css/wa-chat.css?v=20261112n">
   <link rel="stylesheet" href="/assets/css/blog.css?v=20261112h">
 </head>
 <body class="post-page">
@@ -125,18 +125,14 @@
       <div class="wa-body">
         <div class="wa-bubble"><b>Elliza</b><p>Hi, I’m Elliza! 👋<br>Have a project in mind or need help with a website, funnel, content or GoHighLevel? Send me a quick message about what you need, and I’ll personally get back to you with how I can help.</p><time id="waTime"></time></div>
       </div>
-      <form class="wa-form" id="waForm" novalidate>
-        <input id="waVisitorName" name="name" type="text" autocomplete="name" placeholder="Your name" aria-label="Your name" maxlength="80" required>
-        <input id="waVisitorPhone" name="phone" type="tel" autocomplete="tel" placeholder="Your WhatsApp number, e.g. +1 555 123 4567" aria-label="Your WhatsApp number with country code" maxlength="30" required>
-        <textarea id="waText" name="message" rows="3" aria-label="Your message" maxlength="1000">Hi Elliza, I saw your portfolio and want to talk about a project.</textarea>
-        <input class="wa-hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <button class="wa-send" type="submit"><svg class="whatsapp-icon" aria-hidden="true"><use href="#icon-whatsapp"/></svg><span class="wa-send-label">Send a message</span></button>
-        <p class="wa-note" id="waNote" role="status">Goes straight to my WhatsApp</p>
+      <form class="wa-form" id="waForm">
+        <textarea id="waText" rows="3" aria-label="Your message">Hi Elliza, I saw your portfolio and want to talk about a project.</textarea>
+        <button class="wa-send" type="submit"><svg class="whatsapp-icon" aria-hidden="true"><use href="#icon-whatsapp"/></svg>Send a message</button>
+        <p class="wa-note">Opens WhatsApp and goes straight to my phone</p>
       </form>
-      <div class="wa-done" id="waDone" hidden><b>Sent ✓</b><p>Thanks! Your message is on my phone. I’ll reply to you on WhatsApp soon.</p></div>
     </div>
     <button class="wa-fab" id="waFab" type="button" aria-expanded="false" aria-controls="waPanel" aria-label="Chat with Elliza on WhatsApp"><svg class="whatsapp-icon" aria-hidden="true"><use href="#icon-whatsapp"/></svg><span class="wa-x" aria-hidden="true">×</span><i class="wa-dot" aria-hidden="true"></i></button>
   </div>
-  <script src="/assets/js/wa-chat.js?v=20261112s" defer></script>
+  <script src="/assets/js/wa-chat.js?v=20261112k" defer></script>
 </body>
 </html>
