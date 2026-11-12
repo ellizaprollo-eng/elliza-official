@@ -154,3 +154,12 @@ html[data-theme="light"] .portrait img { filter: grayscale(1) brightness(.96) co
 html[data-theme="light"] .portrait::before { background: linear-gradient(180deg, rgba(246,239,231,0), rgba(43,30,22,.14)); }
 html[data-theme="light"] .portrait:hover img,
 html[data-theme="light"] .portrait:focus-within img { filter: grayscale(0) brightness(1) contrast(1); }
+
+/* Skills & tools chips (owner: "fix the backgrounds"): the dark-mode icon shadow (0 10px 26px, 38% black) spilled past
+   each marquee row, got clipped by the row and showed as grey smudges and a rectangle behind the row on ivory.
+   Light mode uses a small shadow that stays inside the row and a clean flat chip. */
+html[data-theme="light"] .tools-marquee .tool-icon { box-shadow: 0 3px 8px -3px rgba(43,30,22,.22), inset 0 0 0 1px rgba(43,30,22,.07); }
+html[data-theme="light"] .tool-chip { background: #fffaf4; border-color: rgba(43,30,22,.12); box-shadow: none; }
+@media (hover: hover) {
+  html[data-theme="light"] .tool-chip:hover { background: #fff3ea; border-color: rgba(177,93,57,.35); }
+}
