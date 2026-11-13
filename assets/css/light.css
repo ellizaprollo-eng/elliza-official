@@ -172,3 +172,8 @@ html[data-theme="light"] .review-shot { box-shadow: 0 0 0 1px rgba(43,30,22,.08)
 @media (hover: hover) {
   html[data-theme="light"] .review-shot:hover { box-shadow: 0 0 0 1px rgba(43,30,22,.1), 0 20px 38px -20px rgba(43,30,22,.4); }
 }
+
+/* About photo natural in light mode too (2026-11-13, owner): no grey filter, no hover change */
+html[data-theme="light"] .portrait img,
+html[data-theme="light"] .portrait:hover img,
+html[data-theme="light"] .portrait:focus-within img { filter: none; }

@@ -2282,3 +2282,45 @@ body.is-ready .hero-wall { opacity: 1; }
   .tools-marquee .tool-icon { width: 36px; height: 36px; flex-basis: 36px; padding: 7px; border-radius: 11px; }
   .tools-marquee .tool-name { font-size: 18px; }
 }
+
+/* Nav line (2026-11-13, owner: a line on hover and under the nav link of the section it takes you to).
+   The line grows in on hover and stays under the link of the section on screen (main.js sets .active). */
+.nav-links a { position: relative; padding: 6px 0; }
+.nav-links a::after,
+.nav-links a.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: block;
+  width: auto;
+  height: 1px;
+  margin: 0;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform .35s cubic-bezier(.2,.7,.2,1);
+}
+.nav-links a:hover::after,
+.nav-links a:focus-visible::after,
+.nav-links a.active::after { transform: scaleX(1); }
+@media (prefers-reduced-motion: reduce) { .nav-links a::after { transition: none; } }
+
+/* About photo (2026-11-13, owner: remove the grey hover, show the photo natural): full colour all the time,
+   no dark overlay, nothing changes on hover. */
+.portrait img,
+.portrait:hover img,
+.portrait:focus-within img { filter: none; transform: none; }
+.portrait::before { display: none; }
+
+/* Cursor in sample popups (2026-11-13, owner: the cursor must not disappear when viewing samples).
+   The Paid ads proof and client review popups are <dialog>s in the browser's top layer, above the custom cursor
+   (z-index 9999), while the page hides the system pointer, so no cursor showed inside them. There the normal
+   pointer comes back and the custom one hides until the popup closes. */
+@media (pointer: fine) {
+  dialog[open], dialog[open] *, dialog[open]::backdrop { cursor: default; }
+  dialog[open] a, dialog[open] button { cursor: pointer; }
+  body:has(dialog[open]) .cursor-dot,
+  body:has(dialog[open]) .cursor-ring { opacity: 0 !important; }
+}

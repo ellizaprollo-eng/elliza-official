@@ -31,15 +31,22 @@ navLinks.querySelectorAll('a').forEach(link => {
   });
 });
 
-// Active navigation section
+// Active navigation section (owner 2026-11-13: the nav line shows on the section a link takes you to).
+// Sections that are not in the nav clear the line. Right after a click the clicked link keeps the line until the
+// scroll ends, so a short section (Blogs) is not handed to the next one on the way down.
 const sections = [...document.querySelectorAll('main section[id]')];
 const navAnchors = [...navLinks.querySelectorAll('a[href^="#"]')];
+const setActiveNav = id => navAnchors.forEach(a => a.classList.toggle('active', a.getAttribute('href') === `#${id}`));
+let navClickLock = 0;
 const sectionObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (!entry.isIntersecting) return;
-    navAnchors.forEach(a => a.classList.toggle('active', a.getAttribute('href') === `#${entry.target.id}`));
-  });
+  if (Date.now() < navClickLock) return;
+  entries.forEach(entry => { if (entry.isIntersecting) setActiveNav(entry.target.id); });
 }, { rootMargin: '-35% 0px -55% 0px' });
+navAnchors.forEach(a => a.addEventListener('click', () => {
+  setActiveNav(a.getAttribute('href').slice(1));
+  navClickLock = Date.now() + 2500; // fallback for browsers without scrollend
+  window.addEventListener('scrollend', () => { navClickLock = 0; }, { once: true });
+}));
 sections.forEach(section => sectionObserver.observe(section));
 
 // Featured work library: 24 items in each category, displayed in four columns
