@@ -240,6 +240,12 @@ Object.entries(projectCatalog).forEach(([category, info]) => {
   video: v.video || '', embed: v.embed || '', loop: v.loop, ratio: v.ratio, length: v.length
 }));
 
+// Zapier automations (2026-11-13): entries come from zapier.js; they join the CRM and automation row and its zoom popup.
+(window.ZAPIER_SAMPLES || []).forEach(z => projectItems.push({
+  category: 'automation', zapier: true, title: z.title, subtitle: `Zapier · ${z.apps}`,
+  image: `assets/images/zapier/${z.id}.webp`, fullImage: `assets/images/zapier/${z.id}.webp`, video: '', liveUrl: ''
+}));
+
 projectsGrid.innerHTML = projectItems.map(item => `
   <article class="project-card reveal${item.category !== 'graphics' ? ' is-hidden' : ''}" data-category="${item.category}" data-video="${item.video}" data-image="${item.image}" data-full-image="${item.fullImage || item.image}" data-live-url="${item.liveUrl || ''}"${item.category === 'aivideo' ? ` data-loop="${item.loop}" data-ratio="${item.ratio}"` : ''} ${item.category !== 'graphics' ? 'style="display:none"' : ''}>
     <a href="${item.liveUrl || '#'}" ${(item.category === 'websites' || item.category === 'funnels') ? 'target="_blank" rel="noopener noreferrer"' : ''} aria-label="${(item.category === 'websites' || item.category === 'funnels') ? `Visit ${item.title}` : `Open ${item.title} project preview`}">
@@ -250,6 +256,8 @@ projectsGrid.innerHTML = projectItems.map(item => `
           ? `<img src="${item.image}" alt="${item.title}, ${item.subtitle}" loading="lazy" decoding="async" draggable="false"><span class="reel-play-badge" aria-hidden="true">▶</span><span class="ai-card-meta"><b>${item.title}</b><small>${item.subtitle} · ${item.length}</small></span>`
           : item.category === 'email'
           ? `<img src="${item.image}" alt="Email design: ${item.title}" loading="lazy" decoding="async" draggable="false">`
+          : item.zapier
+          ? `<img class="zapier-shot" src="${item.image}" alt="Zapier automation: ${item.title}" loading="lazy" decoding="async" draggable="false"><span class="ai-card-meta zap-meta"><b>${item.title}</b><small>${item.subtitle}</small></span>`
           : `<img class="${item.category === 'websites' || item.category === 'funnels' ? 'website-scroll-image' : ''}" src="${item.image}" alt="${item.subtitle} ${item.title.slice(-2)} by Elliza Olvina" loading="lazy" decoding="async" draggable="false">`
         }
       </div>
@@ -513,7 +521,7 @@ function showModalItem(index, direction = 0) {
     modalVideo.style.display = 'none';
     modalImage.style.display = 'block';
     modalImage.src = item.fullImage || item.image;
-    modalImage.alt = item.category === 'email' ? `Email design: ${item.title}` : `${item.subtitle} by Elliza Olvina`;
+    modalImage.alt = item.category === 'email' ? `Email design: ${item.title}` : item.zapier ? `Zapier automation: ${item.title}` : `${item.subtitle} by Elliza Olvina`;
     if (websitePreview) {
       if (modalImage.complete) requestAnimationFrame(updateModalWebsitePreview);
     } else {

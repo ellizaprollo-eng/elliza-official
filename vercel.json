@@ -2,7 +2,7 @@
   "cleanUrls": true,
   "redirects": [
     {
-      "source": "/:path(assets/(?:images/hero-wall|images/builds|images/ads|images/emails|video/hero-wall)/.*)",
+      "source": "/:path(assets/(?:images/hero-wall|images/builds|images/ads|images/emails|images/zapier|video/hero-wall)/.*)",
       "has": [
         {
           "type": "header",
@@ -21,7 +21,7 @@
       "permanent": false
     },
     {
-      "source": "/:path(assets/(?:images/hero-wall|images/builds|images/ads|images/emails|video/hero-wall)/.*)",
+      "source": "/:path(assets/(?:images/hero-wall|images/builds|images/ads|images/emails|images/zapier|video/hero-wall)/.*)",
       "has": [
         {
           "type": "header",
@@ -40,7 +40,7 @@
       "permanent": false
     },
     {
-      "source": "/:path(assets/(?:images/hero-wall|images/builds|images/ads|images/emails|video/hero-wall)/.*.(?:webp|jpe?g|png|gif|avif))",
+      "source": "/:path(assets/(?:images/hero-wall|images/builds|images/ads|images/emails|images/zapier|video/hero-wall)/.*.(?:webp|jpe?g|png|gif|avif))",
       "missing": [
         {
           "type": "header",
@@ -86,7 +86,7 @@
       ]
     },
     {
-      "source": "/:path(assets/(?:images/hero-wall|images/builds|images/ads|images/emails|video/hero-wall)/.*)",
+      "source": "/:path(assets/(?:images/hero-wall|images/builds|images/ads|images/emails|images/zapier|video/hero-wall)/.*)",
       "headers": [
         {
           "key": "Cache-Control",

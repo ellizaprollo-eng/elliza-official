@@ -177,3 +177,11 @@ html[data-theme="light"] .review-shot { box-shadow: 0 0 0 1px rgba(43,30,22,.08)
 html[data-theme="light"] .portrait img,
 html[data-theme="light"] .portrait:hover img,
 html[data-theme="light"] .portrait:focus-within img { filter: none; }
+
+/* 2026-11-13: card captions on AI video posters sit on a dark fade, so they keep light text in light mode
+   (they inherited the dark --text and were unreadable). The Zapier cards use a light caption bar instead. */
+html[data-theme="light"] .ai-card-meta b { color: #f6efe7; }
+html[data-theme="light"] .ai-card-meta small { color: #dfa083; }
+html[data-theme="light"] .ai-card-meta.zap-meta { background: #fffaf4; border-top-color: rgba(43,30,22,.1); }
+html[data-theme="light"] .ai-card-meta.zap-meta b { color: #1c1511; }
+html[data-theme="light"] .ai-card-meta.zap-meta small { color: #a1502d; }
