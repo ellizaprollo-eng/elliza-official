@@ -696,6 +696,12 @@ if (window.matchMedia('(pointer:fine)').matches) {
     el.addEventListener('mouseleave', () => ring.classList.remove('hover'));
   });
   document.addEventListener('mouseleave', () => { dot.style.opacity = ring.style.opacity = '0'; });
+  // Sample popups are top-layer <dialog>s that cover any z-index, so the dot + ring live inside the open one.
+  const cursorHome = dot.parentNode;
+  new MutationObserver(() => {
+    const host = document.querySelector('dialog[open]') || cursorHome;
+    if (dot.parentNode !== host) host.append(dot, ring);
+  }).observe(document.body, { subtree: true, attributeFilter: ['open'] });
 }
 
 

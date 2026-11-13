@@ -2314,15 +2314,11 @@ body.is-ready .hero-wall { opacity: 1; }
 .portrait:focus-within img { filter: none; transform: none; }
 .portrait::before { display: none; }
 
-/* Cursor in sample popups (2026-11-13, owner: the cursor must not disappear when viewing samples).
-   The Paid ads proof and client review popups are <dialog>s in the browser's top layer, above the custom cursor
-   (z-index 9999), while the page hides the system pointer, so no cursor showed inside them. There the normal
-   pointer comes back and the custom one hides until the popup closes. */
-@media (pointer: fine) {
-  dialog[open], dialog[open] *, dialog[open]::backdrop { cursor: default; }
-  dialog[open] a, dialog[open] button { cursor: pointer; }
-  body:has(dialog[open]) .cursor-dot,
-  body:has(dialog[open]) .cursor-ring { opacity: 0 !important; }
+/* Cursor in sample popups (2026-11-13, owner: show the site's own cursor there, not the PC's built-in pointer).
+   The Paid ads proof and client review popups are <dialog>s in the browser's top layer, above any z-index, so
+   main.js moves the cursor dot + ring inside the open popup. The system pointer stays hidden like on the page. */
+@media (pointer: fine) and (min-width: 769px) {
+  dialog[open], dialog[open] *, dialog[open]::backdrop { cursor: none; }
 }
 
 /* Owner 2026-11-13: "no line should stay in the nav, hover only". The active section keeps only its brighter text. */
