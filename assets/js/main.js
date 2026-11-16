@@ -118,6 +118,9 @@ const websiteImages = [
   'https://assets.cdn.filesafe.space/FoDdVxsegLCZtxtLaGhl/media/6a5fc3648d48b5a586ae9908.png', // Websites 04
   'https://assets.cdn.filesafe.space/FoDdVxsegLCZtxtLaGhl/media/6a5fc36430b285321cab95c1.png', // Websites 05
   'https://assets.cdn.filesafe.space/FoDdVxsegLCZtxtLaGhl/media/6a5fc364e4e420b6ec3e3331.png', // Websites 06
+  'assets/images/builds/metabolic-health-rx.webp', // Websites 07 (2026-11-17, full-page shot of the live site)
+  'assets/images/builds/conture-rx.webp', // Websites 08
+  'assets/images/builds/la-vida-md.webp', // Websites 09
      ];
 
 // FUNNEL LINKS: each numbered line controls one column/card.
@@ -142,6 +145,9 @@ const websiteLiveLinks = [
   'https://ffbenterprises.com/', // Website 04 live URL
   'https://www.cloud9ridesbooking.com/', // Website 05 live URL
   'https://kimberleypoolcare.com.au/', // Website 06 live URL
+  'https://metabolichealthrx.com/', // Website 07 live URL
+  'https://conturerx.com/', // Website 08 live URL
+  'https://lavidamd.com/', // Website 09 live URL
 ];
 
 // LIVE FUNNEL LINKS: replace each # with the actual live funnel URL.
