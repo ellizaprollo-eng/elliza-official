@@ -121,6 +121,7 @@ const websiteImages = [
   'assets/images/builds/metabolic-health-rx.webp', // Websites 07 (2026-11-17, full-page shot of the live site)
   'assets/images/builds/conture-rx.webp', // Websites 08
   'assets/images/builds/la-vida-md.webp', // Websites 09
+  'assets/images/builds/boost-medspa.webp', // Websites 10 (2026-11-18, Boost Med Spa concept)
      ];
 
 // FUNNEL LINKS: each numbered line controls one column/card.
@@ -148,6 +149,7 @@ const websiteLiveLinks = [
   'https://metabolichealthrx.com/', // Website 07 live URL
   'https://conturerx.com/', // Website 08 live URL
   'https://lavidamd.com/', // Website 09 live URL
+  'https://boost-medspa-lonetree.vercel.app/', // Website 10 live URL
 ];
 
 // LIVE FUNNEL LINKS: replace each # with the actual live funnel URL.
