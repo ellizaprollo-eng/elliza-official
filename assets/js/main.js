@@ -254,6 +254,12 @@ Object.entries(projectCatalog).forEach(([category, info]) => {
   image: `assets/images/zapier/${z.id}.webp`, fullImage: `assets/images/zapier/${z.id}.webp`, video: '', liveUrl: ''
 }));
 
+// Billionaire Barbie bootcamp graphics (owner 2026-11-19): shown first in 01 Social media graphics, next to the Client spotlight.
+projectItems.unshift(...[1, 2, 3, 4, 5, 6].map(n => ({
+  category: 'graphics', title: `Rich Off Taxes Bootcamp ${String(n).padStart(2, '0')}`, subtitle: 'Bootcamp ad graphic for Billionaire Barbie',
+  image: `assets/images/graphics/barbie-bootcamp-${n}.webp`, fullImage: `assets/images/graphics/barbie-bootcamp-${n}.webp`, video: '', liveUrl: ''
+})));
+
 projectsGrid.innerHTML = projectItems.map(item => `
   <article class="project-card reveal${item.category !== 'graphics' ? ' is-hidden' : ''}" data-category="${item.category}" data-video="${item.video}" data-image="${item.image}" data-full-image="${item.fullImage || item.image}" data-live-url="${item.liveUrl || ''}"${item.category === 'aivideo' ? ` data-loop="${item.loop}" data-ratio="${item.ratio}"` : ''} ${item.category !== 'graphics' ? 'style="display:none"' : ''}>
     <a href="${item.liveUrl || '#'}" ${(item.category === 'websites' || item.category === 'funnels') ? 'target="_blank" rel="noopener noreferrer"' : ''} aria-label="${(item.category === 'websites' || item.category === 'funnels') ? `Visit ${item.title}` : `Open ${item.title} project preview`}">
