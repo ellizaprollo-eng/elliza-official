@@ -146,3 +146,37 @@ html[data-theme="light"] .sw-spot { background: radial-gradient(circle at 92% 0%
   .sw-spot-stats { gap: 10px; }
   .sw-spot-stats strong { font-size: 22px; }
 }
+
+/* 06 Paid ads results, layout fix (owner 2026-11-21: "fix the UX/UI design of this"). The 6 cards ran 5 across with
+   card 06 alone on a second row, and each card was narrow with small grey text. Now: 3 across on desktop and 2 on
+   tablet (two or three full rows, no lone card), every row of text lines up across the cards (subgrid), the source
+   line sits under the title, the main number is bigger on a soft panel, and the platform is a chip with a colour dot.
+   Phones keep the sliding row. Markup change: the platform name is wrapped in .adr-pf. */
+.adr-pf { display: inline-flex; align-items: center; gap: 7px; padding: 6px 11px 6px 9px; border: 1px solid var(--line); border-radius: 999px; color: var(--text); font-size: 10px; letter-spacing: .14em; white-space: nowrap; }
+.adr-pf::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--pf, var(--accent)); }
+.adr-pf[data-pf="meta"] { --pf: #1877f2; }
+.adr-pf[data-pf="google"] { --pf: #34a853; }
+.adr-pf[data-pf="shopify"] { --pf: #95bf47; }
+.adr-card > .adr-k { order: 1; }
+.adr-card > h3 { order: 2; margin: 22px 0 6px; font-size: 26px; }
+.adr-card > .adr-sub { order: 3; margin: 0 0 18px; color: var(--muted); font-size: 12px; line-height: 1.5; }
+.adr-card > .adr-hero { order: 4; margin: 0 0 4px; padding: 16px 16px 14px; border-radius: 14px; background: rgba(200,120,88,.09); }
+.adr-card > .adr-lines { order: 5; margin: 0 0 18px; border-top: 0; }
+.adr-card > .adr-shot { order: 6; aspect-ratio: 21 / 9; }
+.adr-hero strong { font-size: clamp(32px, 2.9vw, 42px); }
+.adr-hero span { font-size: 12.5px; }
+.adr-lines li { padding: 10px 2px; font-size: 13px; }
+.adr-lines li:last-child { border-bottom: 0; }
+@media (min-width: 640px) {
+  .adr-row, .adr-row.is-all { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; overflow: visible; padding-bottom: 0; }
+}
+@media (min-width: 980px) {
+  .adr-row, .adr-row.is-all { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+  .adr-card { padding: 26px 24px 24px; }
+}
+@supports (grid-template-rows: subgrid) {
+  @media (min-width: 640px) {
+    .adr-card { display: grid; grid-row: span 6; grid-template-rows: subgrid; row-gap: 0; }
+    .adr-card > .adr-shot { align-self: end; }
+  }
+}
