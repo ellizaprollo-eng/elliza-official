@@ -157,7 +157,7 @@ const websiteLiveLinks = [
 const funnelLiveLinks = [
   'https://sites.leadconnectorhq.com/preview/RhbZu6L6XTvwRte3kgcC', // Funnel 01 live URL
   'https://sites.leadconnectorhq.com/preview/hqDxIGPYci9yVCplQyqL?notrack=true', // Funnel 02 live URL
-  'https://ffbenterprises.com/vsl', // Funnel 03 live URL
+  'https://ffbenterprises.com/', // Funnel 03 live URL (2026-11-21: /vsl now returns 404 on the client's site, so this opens their live home page)
   'https://lendbox.impruvu.io/vsl', // Funnel 04 live URL
   'https://creditsnipers.com/vsl-page', // Funnel 05 live URL
   'https://validate.inventionpartners.com/home', // Funnel 06 live URL
